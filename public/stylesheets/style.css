@@ -1,0 +1,95 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+pre{
+  background-color: #20201d;
+  color: #a6a28c;
+  padding: 10px;
+  border-radius: 3px;
+  
+}
+
+.blog-title a{
+  color : black;
+  text-decoration: none;
+}
+.blog-title a::visited{
+  color : black;
+  text-decoration: none;
+}
+
+#md-editor{
+  width: 100%;
+  height : 30vh;
+}
+#title{
+  height: 30px;
+  width: 100%;
+  font-size: 28px;
+}
+
+#register{
+  text-align: center;
+}
+
+#register input[type="password"],
+#register input[type="text"]{
+  width : 100%;
+  height: 25px;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#register input[type="submit"]{
+  background-color: white;
+  border : 1px solid darkgrey;
+  border-bottom: 2px solid darkgrey;
+  border-radius: 3px;
+  width: 75%;
+  font-size: 24px;
+}
+#register input[type="submit"]:hover{
+  border-bottom : 1px solid darkgrey;
+}
+#register input[type="submit"]:active{
+  border : 1px solid lightgrey;
+}
+#register input[type="submit"]:focus{
+  outline: none;
+}
+
+#compiled-markdown{
+  width: 100%;
+  height : 30vh;
+  overflow-y: scroll;
+  border : 1px solid darkgrey;
+  background-color: lightgrey;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+article{
+  background-color: lightgrey;
+  border-radius: 3px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  
+}
+
+article header{
+  padding:10px 20px 10px 20px;
+  background-color: darkgray
+}
+
+article section{
+  padding:0px 25px 0px 25px;
+}
+article footer{
+    padding:0px 20px 5px 20px;
+}
