@@ -1,9 +1,8 @@
 # BlogMac
-## a blogging platform built on NodeJS, Express, and Mongoose
+### a blogging platform built on NodeJS, Express, and Mongoose
 
 I am currently building this blogging platform (soon to be CMS?) for personal use.
 
-----
 
 Setup
 ----
