@@ -50,6 +50,25 @@ module.exports = {
 
             return concat;
         });
+        hbs.registerHelper("times", function (n, block) {
+            var accum = '';
+            for (var i = 1; i <= n; ++i) {
+                accum += block.fn(i);
+            }
+            return accum;
+        });
+        hbs.registerHelper("math", function (lvalue, operator, rvalue, options) {
+            lvalue = parseFloat(lvalue);
+            rvalue = parseFloat(rvalue);
+
+            return {
+                "+": lvalue + rvalue,
+                "-": lvalue - rvalue,
+                "*": lvalue * rvalue,
+                "/": lvalue / rvalue,
+                "%": lvalue % rvalue
+            }[operator];
+        });
     }
 };
 

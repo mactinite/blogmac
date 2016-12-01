@@ -5,7 +5,7 @@ module.exports = function (passport) {
     var router = express.Router();
 
     function renderPage(res, pageData) {
-        res.render(pageData.template, { title: pageData.title, postData: pageData.postData });
+        res.render(pageData.template, pageData);
     }
 
     /* GET specific post page. */
@@ -23,6 +23,9 @@ module.exports = function (passport) {
         pageData = {
             template: "index.hbs",
             title: "Blog",
+            pageNumber: req.query.page,
+            user : req.user,
+            isAuthenticated : req.isAuthenticated(),
             postData: {} //filled in the getBlogPosts method
         };
         blogTools.getBlogPosts(res, pageData, renderPage);
@@ -38,18 +41,18 @@ module.exports = function (passport) {
         blogTools.writeBlogPost(req, res);
     });
 
-    router.get('/users/register', function (req, res, next) {
-        res.render('register.hbs', { title: 'Register' });
+    router.get('/register', function (req, res, next) {
+        res.render('register.hbs', { title: 'Register', messages : req.flash('signupMessage')});
     });
 
-    router.post('/users/register', passport.authenticate('local-signup', {
+    router.post('/register', passport.authenticate('local-signup', {
         successRedirect : '/',
-        failureRedirect : '/users/register',
+        failureRedirect : '/register',
         failureFlash : true
     }));
 
     router.get('/login', function (req, res, next) {
-        res.render('login.hbs', { title: 'Log in' });
+        res.render('login.hbs', { title: 'Log in', messages: req.flash('loginMessage')});
     });
     
     router.post('/login', passport.authenticate('local-login', {

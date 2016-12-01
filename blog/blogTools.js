@@ -20,7 +20,11 @@ module.exports = {
             });
     },
     getBlogPosts: function (res, pageData, callback) {
+        var pageNumber = pageData.pageNumber === undefined ? 1 : pageData.pageNumber;
+        var totalPages;
+        /*
         blogPost.find({})
+            .paginate(pageNumber,5)
             .sort('-date')
             .populate("blogpost")
             .exec(function (err, posts) {
@@ -30,8 +34,17 @@ module.exports = {
                     pageData.postData = posts;
                 }
                 callback(res, pageData);
-
             });
+        */
+        blogPost.paginate({},{page: pageNumber, limit: 5, sort: {date : -1}}).then( function(result){
+            postData = result.docs;
+            postData.page = result.page;
+            postData.totalPages = result.pages;
+            postData.isFirstPage = result.page == 1;
+            postData.isLastPage = result.page == result.pages;
+            pageData.postData = postData;
+            callback(res,pageData);
+        });
 
     },
     //TODO: Refactor this pls

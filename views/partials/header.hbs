@@ -1,0 +1,11 @@
+<div class="u-full-width site-header">
+<h1>{{title}}</h1>
+{{#if isAuthenticated}}
+<div class="user-info">
+    <p>Hello <span id="username">{{user.username}}</span></p>
+    <a href="/logout">Logout</a>
+    <a href="/new-post">New Post</a>
+</div>
+{{/if}}
+
+</div>

@@ -1,20 +1,27 @@
-<h1>{{title}}</h1>
+<div class="row">
+    <div class="offset-by-three six columns">
+        <div class="form-container">
+            <form action="/register" class="user-forms" method="post">
+                {{#if messages}}
+                <div class="error">{{messages}}</div>
+                {{/if}}
+                <label for="username">Username</label>
+                <input class="u-full-width" id="username" name="username" type="text" />
 
-<form action="/users/register" id="register" method="post">
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text" />
+                <label for="email">Email</label>
+                <input class="u-full-width" id="email" name="email" type="email" />
 
-    <label for="email">Email</label>
-    <input id="email" name="email" type="text" />
-    
-    <label for="firstName">First Name</label>
-    <input id="firstName" name="firstName" type="text" />
+                <label for="firstName">First Name</label>
+                <input class="u-full-width" id="firstName" name="firstName" type="text" />
 
-    <label for="lastName">Last Name</label>
-    <input id="lastName" name="lastName" type="text" />
+                <label for="lastName">Last Name</label>
+                <input class="u-full-width" id="lastName" name="lastName" type="text" />
 
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" />
+                <label for="password">Password</label>
+                <input class="u-full-width" id="password" name="password" type="password" />
 
-    <input type="submit" value="Register" />
-</form>
+                <input class="u-full-width button-primary" type="submit" value="Register" />
+            </form>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@ var moment = require('moment');
 var path = require('path');
 var passport = require('passport');
 var mongoose = require('mongoose');
+
 var flash = require('connect-flash');
 
 var favicon = require('serve-favicon');
@@ -27,7 +28,6 @@ require('./config/passport')(passport);
 //routes
 var routes = require('./routes')(passport);
 
-
 var app = express();
 
 // view engine setup
@@ -43,6 +43,7 @@ app.use(flash());
 
 //register helpers
 hbsHelpers.registerHelpers();
+hbs.registerPartials(__dirname + '/views/partials');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

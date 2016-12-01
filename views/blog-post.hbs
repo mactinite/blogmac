@@ -1,14 +1,19 @@
-<article>
-    <header>
-        <h2>{{postData.title}}</h2>
-        <p><small>By {{postData.author}} on {{formatTime postData.date "LLL"}} </small></p>
-    </header>
-    <section class="post-content">
-        
-        <div>{{md (concat a = "./data/blog/" b = postData.page_slug c = "/content.md")}}</div>
-        
-    </section>
-    <footer>
-        
-    </footer>
-</article>
+<div class="row">
+    <div class="twelve columns">
+        <article class="blog-post">
+            <header>
+                <div class="blog-title">
+                    <h2>{{postData.title}}</h2>
+                    <p><small>By {{postData.author}} on {{formatTime postData.date "LLL"}} </small></p>
+                </div>
+
+            </header>
+            <section class="post-content">
+                <div>{{md (concat a = "./data/blog/" b = postData.page_slug c = "/content.md")}}</div>
+            </section>
+            <footer>
+
+            </footer>
+        </article>
+    </div>
+</div>

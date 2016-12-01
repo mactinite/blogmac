@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate')
 
 var Schema = mongoose.Schema;
 
@@ -9,5 +10,7 @@ var BlogPost = new Schema({
     date      : Date,
     dateLastEdited : Date
 });
+
+BlogPost.plugin(mongoosePaginate);
 
 mongoose.model('BlogPost',BlogPost);
