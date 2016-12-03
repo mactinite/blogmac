@@ -1,6 +1,7 @@
 var fs = require('fs');
 var mongoose = require("mongoose");
-mongoose.Promise = global.Promise;
+var promise = require("bluebird")
+mongoose.Promise = promise;
 
 var blogPost = mongoose.model("BlogPost");
 
@@ -22,20 +23,6 @@ module.exports = {
     getBlogPosts: function (res, pageData, callback) {
         var pageNumber = pageData.pageNumber === undefined ? 1 : pageData.pageNumber;
         var totalPages;
-        /*
-        blogPost.find({})
-            .paginate(pageNumber,5)
-            .sort('-date')
-            .populate("blogpost")
-            .exec(function (err, posts) {
-                if (!posts) {
-                    //No Post Exists
-                } else {
-                    pageData.postData = posts;
-                }
-                callback(res, pageData);
-            });
-        */
         blogPost.paginate({},{page: pageNumber, limit: 5, sort: {date : -1}}).then( function(result){
             postData = result.docs;
             postData.page = result.page;

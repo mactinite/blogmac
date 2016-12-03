@@ -7,6 +7,10 @@ module.exports = function (passport) {
     function renderPage(res, pageData) {
         res.render(pageData.template, pageData);
     }
+    function sendJson(res, pageData) {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(pageData));
+    }
 
     /* GET specific post page. */
     router.get('/blog-post/:page_slug', function (req, res, next) {
@@ -16,6 +20,15 @@ module.exports = function (passport) {
             postData: {} //filled in the getBlogPost method
         };
         blogTools.getBlogPost(res, req.params.page_slug, pageData, renderPage);
+    });
+
+        /* GET blog posts returns json. */
+    router.get('/blog-posts', function (req, res, next) {
+        pageData = {
+            pageNumber: req.query.page,
+            postData: {} //filled in the getBlogPosts method
+        };
+        blogTools.getBlogPosts(res, pageData, sendJson);
     });
 
     /* GET home page. */

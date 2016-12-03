@@ -1,26 +1,30 @@
 <div class="row">
     <div class="offset-by-three six columns">
         <div class="form-container">
-            <form action="/register" class="user-forms" method="post">
-                {{#if messages}}
-                <div class="error">{{messages}}</div>
-                {{/if}}
-                <label for="username">Username</label>
-                <input class="u-full-width" id="username" name="username" type="text" />
+            {{#if messages}}
+            <div class="flash">
+                <div class="message error">{{messages}}</div>
+            </div>
+            {{/if}}
+            <form action="/register" method="post">
+                <div class="user-forms">
+                    <label for="username">Username</label>
+                    <input class="u-full-width" id="username" name="username" type="text" />
 
-                <label for="email">Email</label>
-                <input class="u-full-width" id="email" name="email" type="email" />
+                    <label for="email">Email</label>
+                    <input class="u-full-width" id="email" name="email" type="email" />
 
-                <label for="firstName">First Name</label>
-                <input class="u-full-width" id="firstName" name="firstName" type="text" />
+                    <label for="firstName">First Name</label>
+                    <input class="u-full-width" id="firstName" name="firstName" type="text" />
 
-                <label for="lastName">Last Name</label>
-                <input class="u-full-width" id="lastName" name="lastName" type="text" />
+                    <label for="lastName">Last Name</label>
+                    <input class="u-full-width" id="lastName" name="lastName" type="text" />
 
-                <label for="password">Password</label>
-                <input class="u-full-width" id="password" name="password" type="password" />
+                    <label for="password">Password</label>
+                    <input class="u-full-width" id="password" name="password" type="password" />
 
-                <input class="u-full-width button-primary" type="submit" value="Register" />
+                    <input class="u-full-width button-primary" type="submit" value="Register" />
+                </div>
             </form>
         </div>
     </div>

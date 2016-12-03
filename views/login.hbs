@@ -1,18 +1,21 @@
 <div class="row">
     <div class="offset-by-three six columns">
         <div class="form-container">
-            <form action="/login" class="user-forms" method="post">
-                {{#if messages}}
-                <div class="error">{{messages}}</div>
-                {{/if}}
-                <label for="email">Email</label>
-                <input class="u-full-width" placeholder="email" id="email" name="email" type="email" />
+            {{#if messages}}
+            <div class="flash">
+                <div class="message error">{{messages}}</div>
+            </div>
+            {{/if}}
+            <form action="/login" method="post">
+                <div class="user-forms">
+                    <label for="email">Email</label>
+                    <input class="u-full-width" placeholder="email" id="email" name="email" type="email" />
 
-                <label for="password">Password</label>
-                <input class="u-full-width" placeholder="password" id="password" name="password" type="password" />
+                    <label for="password">Password</label>
+                    <input class="u-full-width" placeholder="password" id="password" name="password" type="password" />
 
-                <input class="button-primary u-full-width" type="submit" value="Login" />
-
+                    <input class="button-primary u-full-width" type="submit" value="Login" />
+                </div>
             </form>
         </div>
     </div>

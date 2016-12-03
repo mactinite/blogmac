@@ -22,6 +22,7 @@
 
     markedApp.controller('markedController', ['$scope', '$http', function($scope, $http) {
         var markdown = this;  // alias for this, so we can access it in $scope.$watch
+        this.showPreview = false;        
         this.inputText = '';
         this.title;
         $scope.$watch('marked.inputText', function(current, original) {

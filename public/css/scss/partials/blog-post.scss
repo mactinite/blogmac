@@ -1,0 +1,48 @@
+
+/*
+*   Blog Post Styling 
+*/
+
+article.blog-post {
+    border-bottom: 2px solid $secondary-color;
+    border-radius: 3px;
+    margin-bottom: 15px;
+    background-color: $primary-color;
+    overflow: hidden;
+    header {
+        width: 100%;
+        .post-highlight{
+            border-top: 5px solid $highlight-color;
+        }
+        .post-success{
+            border-top: 5px solid $success-color;
+        }
+        .post-error { 
+            border-top: 5px solid $error-color;
+        }
+        .post-warning{
+            border-top: 5px solid $warning-color;
+        }
+        .blog-title {
+            padding: 15px 0px 0px 15px;
+            margin-bottom: 0px;
+            h2 {
+                padding-bottom: 0px;
+                margin-bottom: 0px;
+                a {
+                    text-decoration: none;
+                    color: black;
+                }
+            }
+            p {
+                margin-top: -15px;
+                padding: 15px 0px 0px 15px;
+            }
+        }
+    }
+    .post-content {
+        padding: 15px;
+    }
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}

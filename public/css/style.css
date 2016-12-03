@@ -1,32 +1,111 @@
+/*
+*   Blog Post Styling 
+*/
+article.blog-post {
+  border-bottom: 2px solid #747474;
+  border-radius: 3px;
+  margin-bottom: 15px;
+  background-color: #d4d4d4;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+  article.blog-post header {
+    width: 100%; }
+    article.blog-post header .post-highlight {
+      border-top: 5px solid #669ed7; }
+    article.blog-post header .post-success {
+      border-top: 5px solid #3ea611; }
+    article.blog-post header .post-error {
+      border-top: 5px solid #f45169; }
+    article.blog-post header .post-warning {
+      border-top: 5px solid #ec7c5b; }
+    article.blog-post header .blog-title {
+      padding: 15px 0px 0px 15px;
+      margin-bottom: 0px; }
+      article.blog-post header .blog-title h2 {
+        padding-bottom: 0px;
+        margin-bottom: 0px; }
+        article.blog-post header .blog-title h2 a {
+          text-decoration: none;
+          color: black; }
+      article.blog-post header .blog-title p {
+        margin-top: -15px;
+        padding: 15px 0px 0px 15px; }
+  article.blog-post .post-content {
+    padding: 15px; }
+
+/*
+*  Forms
+*/
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%; }
-
-.error {
-  background-color: #ff9595;
-  border: 1px solid #ff6f6f;
-  border-radius: 3px;
-  padding: 5px; }
-
-.user-forms {
-  padding: 25px;
   width: 100%;
-  padding: 5px;
+  flex-direction: column; }
+
+.flash {
+  width: 100%;
   background-color: lightgrey;
   border-radius: 3px;
-  border-bottom: 2px solid darkgrey; }
-  .user-forms label {
-    margin-top: 10px; }
-  .user-forms input[type="submit"] {
-    margin-top: 15px; }
+  border-bottom: 2px solid darkgrey;
+  margin-bottom: 5px;
+  overflow: hidden; }
+  .flash .message {
+    padding: 5px;
+    height: 100%;
+    width: 100%; }
+  .flash .highlight {
+    border-top: 5px solid #669ed7; }
+  .flash .success {
+    border-top: 5px solid #3ea611; }
+  .flash .error {
+    border-top: 5px solid #f45169; }
+  .flash .warning {
+    border-top: 5px solid #ec7c5b; }
+
+form {
+  width: 100%;
+  background-color: lightgrey;
+  border-radius: 3px;
+  border-bottom: 2px solid darkgrey;
+  margin-bottom: 5px; }
+  form .user-forms {
+    padding: 5px; }
+    form .user-forms label {
+      margin-top: 10px; }
+    form .user-forms input[type="submit"] {
+      margin-top: 15px; }
 
 .body {
   margin: 0px;
   padding: 0px;
-  height: 100%; }
+  height: 100%;
+  background-color: #e2f1f1; }
 
+code {
+  background-color: #20201d;
+  color: #a6a28c;
+  border-radius: 3px; }
+
+#md-editor {
+  width: 100%;
+  height: 30vh; }
+
+#compiled-markdown {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: wrap;
+  margin-bottom: 10px; }
+
+#post-preview {
+  margin: 10px; }
+  #post-preview a {
+    color: black;
+    text-decoration: none; }
+
+/*
+*   Site Header
+*/
 .site-header {
   margin: 0px;
   margin-bottom: 25px;
@@ -48,47 +127,3 @@
     margin-left: auto; }
     .site-header .user-info p {
       margin: auto; }
-
-code {
-  background-color: #20201d;
-  color: #a6a28c;
-  padding: 10px;
-  border-radius: 3px; }
-
-#md-editor {
-  width: 100%;
-  height: 30vh; }
-
-#compiled-markdown {
-  width: 100%;
-  height: 30vh;
-  overflow-y: auto;
-  overflow-x: wrap;
-  border: 1px solid darkgrey;
-  background-color: lightgrey;
-  padding: 5px;
-  margin-bottom: 10px; }
-
-article.blog-post {
-  border-bottom: 2px solid darkgrey;
-  border-radius: 3px;
-  margin-bottom: 15px;
-  background-color: lightgrey;
-  overflow: hidden; }
-  article.blog-post header {
-    width: 100%;
-    background-color: #a0a0a0; }
-    article.blog-post header .blog-title {
-      padding: 15px 0px 0px 15px;
-      margin-bottom: 0px; }
-      article.blog-post header .blog-title h2 {
-        padding-bottom: 0px;
-        margin-bottom: 0px; }
-        article.blog-post header .blog-title h2 a {
-          text-decoration: none;
-          color: black; }
-      article.blog-post header .blog-title p {
-        margin-top: -15px;
-        padding: 15px 0px 0px 15px; }
-  article.blog-post .post-content {
-    padding: 15px; }

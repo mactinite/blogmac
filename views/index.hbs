@@ -2,24 +2,23 @@
 <div class="row">
     <div class="twelve columns">
     {{#each postData}}
-    <article class="blog-post">
-        <header>
-            <div class="blog-title">
-                <h2><a href={{concat a="/blog-post/" b=page_slug}}>{{title}}</a></h2>
-                <p><small>By {{author}} on {{formatTime date "LLL"}} </small></p>
-            </div>
-            
-        </header>
-        <section class="post-content">
-            <div>{{md (concat a = "./data/blog/" b = page_slug c = "/content.md")}}</div>
-        </section>
-        <footer>
-            
-        </footer>
-    </article>
-
-
+        <article class="blog-post">
+            <header>
+                <div class="blog-title post-highlight">
+                    <h2><a href={{concat a="/blog-post/" b=page_slug}}>{{title}}</a></h2>
+                    <p><small>By {{author}} on {{formatTime date "LLL"}} </small></p>
+                </div>
+                
+            </header>
+            <section class="post-content">
+                <div>{{md (concat a = "./data/blog/" b = page_slug c = "/content.md")}}</div>
+            </section>
+            <footer>
+                
+            </footer>
+        </article>
     {{/each}} 
+
     {{#unless postData.isFirstPage}} 
         <a href={{concat a="/?page=" b=(math postData.page "-" 1)}}>&lt; Back</a>
     {{/unless}} 

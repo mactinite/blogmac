@@ -1,0 +1,54 @@
+
+/*
+*  Forms
+*/
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+.flash {
+    width: 100%;
+    background-color: lightgrey;
+    border-radius: 3px;
+    border-bottom: 2px solid darkgrey;
+    margin-bottom: 5px;
+    overflow: hidden;
+    .message{
+        padding: 5px;
+        height: 100%;
+        width: 100%;
+    }
+    .highlight{
+        border-top: 5px solid $highlight-color;
+    }
+    .success{
+        border-top: 5px solid $success-color;
+    }
+    .error { 
+        border-top: 5px solid $error-color;
+    }
+    .warning{
+        border-top: 5px solid $warning-color;
+    }
+}
+form {
+        width: 100%;
+        background-color: lightgrey;
+        border-radius: 3px;
+        border-bottom: 2px solid darkgrey;
+        margin-bottom: 5px;
+    .user-forms {
+        padding: 5px;
+        label {
+            margin-top: 10px;
+        }
+        input[type="submit"] {
+            margin-top: 15px;
+        }
+    }
+}
