@@ -1,47 +1,50 @@
 var fs = require('fs');
 var mongoose = require("mongoose");
-var promise = require("bluebird")
-mongoose.Promise = promise;
+var Promise = require("bluebird");
+var util = require('util');
+mongoose.Promise = Promise;
 
 var blogPost = mongoose.model("BlogPost");
-
+require('promise/lib/rejection-tracking').enable();
 
 module.exports = {
-    getBlogPost: function (res, slug, pageData, callback) {
-        blogPost.findOne({ 'page_slug': slug })
+    getBlogPost: function (slug) {
+        return new Promise((resolve,reject)=>{
+            blogPost.findOne({ 'page_slug': slug }).
+            lean()
             .populate("blogpost")
-            .exec(function (err, post) {
+            .exec((err, post) => {
                 if (!post) {
-                    //No Post Exists
+                    reject({error : "No Such Post Exists!"});
                 } else {
-                    pageData.postData = post;
-                    pageData.title = post.title;
+                    post.content = fs.readFileSync(("./data/blog/" + post.page_slug + "/content.md"), "UTF-8");
+                    resolve(post);
                 }
-                callback(res, pageData);
             });
-    },
-    getBlogPosts: function (res, pageData, callback) {
-        var pageNumber = pageData.pageNumber === undefined ? 1 : pageData.pageNumber;
-        var totalPages;
-        blogPost.paginate({},{page: pageNumber, limit: 5, sort: {date : -1}}).then(function(result){
-            postData = [];
-            postData = JSON.parse(JSON.stringify(result.docs));
-            pageData.page = result.page;
-            pageData.totalPages = result.pages;
-            postData.forEach((post,index, array) => {
-                array[index].content = fs.readFileSync(("./data/blog/"+post.page_slug+"/content.md"),"UTF-8");
-            });
-            pageData.postData = postData;
-            callback(res,pageData);
         });
 
+    },
+    getBlogPosts: function (pageNumber) {
+        return new Promise(function (resolve, reject) {
+            blogPost.paginate({}, { page: pageNumber, leanWithId: true, lean: true, limit: 5, sort: { date: -1 } }).then(result => {
+                var postData = result.docs;
+                pageData.totalPages = result.pages;
+                postData.forEach((post, index, array) => {
+                        array[index].content = fs.readFileSync(("./data/blog/" + post.page_slug + "/content.md"), "UTF-8");
+                });
+                pageData.postData = postData;
+                resolve(pageData);
+            }).catch(e => {
+                reject(e);
+            });
+        });
     },
     //TODO: Refactor this pls
     writeBlogPost: function (req, res) {
         console.log(req.body);
         var newPost = new blogPost();
-        
-        if(req.user.role >= 2) {
+
+        if (req.user.role >= 2) {
             res.send({ error: "Not enough permissions!" });
             return console.error("User " + req.user.email + " does not have enough permissions to post.");
         }

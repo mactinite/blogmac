@@ -1,19 +1,22 @@
 <div class="row">
     <div class="twelve columns">
-        <article class="blog-post">
-            <header>
-                <div class="blog-title">
-                    <h2>{{postData.title}}</h2>
-                    <p><small>By {{postData.author}} on {{formatTime postData.date "LLL"}} </small></p>
-                </div>
+        <markdown ng-app="blogPosts" ng-controller="blogPostsController" ng-init="getBlogPostData('{{slug}}')">
+            <article class="blog-post">
+                <header>
+                    <div class="blog-title">
+                        <h2>{[{blogPostData.title}]}</h2>
+                        <p><small>By {[{blogPostData.author}]} on {[{blogPostData.date | date}]} </small></p>
+                    </div>
 
-            </header>
-            <section class="post-content">
-                <div>{{md (concat a = "./data/blog/" b = postData.page_slug c = "/content.md")}}</div>
-            </section>
-            <footer>
+                </header>
+                <section class="post-content">
+                    <div marked="blogPostData.content"></div>
+                </section>
+                <footer>
 
-            </footer>
-        </article>
+                </footer>
+            </article>
+        </div>
     </div>
 </div>
+<script type="text/javascript" src="/javascripts/blog-posts.js"></script>

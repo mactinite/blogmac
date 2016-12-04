@@ -50,4 +50,20 @@ blogPosts.controller("blogPostsController", ["$scope", "$http", function ($scope
             }
         });
     };
+
+    $scope.getBlogPostData = function(pageSlug){
+        var req = {
+            method: 'GET',
+            url: '/blog-post?page_slug=' + pageSlug
+        };
+        $http(req).then(function(res,status,headers,config){
+            if(res.data.error != null){
+                $scope.error = res.data.error;
+            }
+            else{
+                $scope.blogPostData = res.data;
+            }
+            
+        });
+    };
 }]);

@@ -1,5 +1,7 @@
 var express = require('express');
 var blogTools = require(__dirname + '/blog/blogTools.js');
+var Promise = require('promise')
+var util = require('util');
 
 module.exports = function (passport) {
     var router = express.Router();
@@ -7,28 +9,41 @@ module.exports = function (passport) {
     function renderPage(res, pageData) {
         res.render(pageData.template, pageData);
     }
-    function sendJson(res, pageData) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(pageData));
-    }
-
-    /* GET specific post page. */
+        /* GET specific post page. */
     router.get('/blog-post/:page_slug', function (req, res, next) {
         pageData = {
             template: "blog-post.hbs",
-            title: "", //filled in the getBlogPost method
-            postData: {} //filled in the getBlogPost method
+            title: "Blog",
+            slug :req.params.page_slug,
+            user: req.user,
+            isAuthenticated: req.isAuthenticated(),
         };
-        blogTools.getBlogPost(res, req.params.page_slug, pageData, renderPage);
+        res.render(pageData.template,pageData);
     });
 
-        /* GET blog posts returns json. */
-    router.get('/blog-posts', function (req, res, next) {
+        /* GET specific post returns json. */
+    router.get('/blog-post', function (req, res, next) {
         pageData = {
-            pageNumber: req.query.page,
-            postData: {} //filled in the getBlogPosts method
+            template: "blog-post.hbs",
+            title: "Blog", //filled in the getBlogPost method
+            postData: {} //filled in the getBlogPost method
         };
-        blogTools.getBlogPosts(res, pageData, sendJson);
+        blogTools.getBlogPost(req.query.page_slug).then(data => {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify(data));
+        }).catch(e => {
+            res.send(e);
+        });
+    });
+
+    /* GET blog posts returns json. */
+    router.get('/blog-posts', function (req, res, next) {
+        blogTools.getBlogPosts(req.query.page).then((pageData) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify(pageData));
+        }).catch((e) => {
+            throw e;
+        });
     });
 
     /* GET home page. */
@@ -36,15 +51,22 @@ module.exports = function (passport) {
         pageData = {
             template: "index.hbs",
             title: "Blog",
-            user : req.user,
-            isAuthenticated : req.isAuthenticated(),
+            user: req.user,
+            isAuthenticated: req.isAuthenticated(),
         };
         res.render(pageData.template, pageData);
     });
 
     //Render the new post page
     router.get('/new-post', isLoggedIn, function (req, res, next) {
-        res.render('new_post', { title: 'Create A New Post', user : req.user });
+        pageData = {
+            template: "new_post",
+            title: "Blog",
+            slug :req.params.page_slug,
+            user: req.user,
+            isAuthenticated: req.isAuthenticated(),
+        };
+        res.render(pageData.template,pageData);
     });
 
     //Handle new post requests
@@ -53,26 +75,26 @@ module.exports = function (passport) {
     });
 
     router.get('/register', function (req, res, next) {
-        res.render('register.hbs', { title: 'Register', messages : req.flash('signupMessage')});
+        res.render('register.hbs', { title: 'Register', messages: req.flash('signupMessage') });
     });
 
     router.post('/register', passport.authenticate('local-signup', {
-        successRedirect : '/',
-        failureRedirect : '/register',
-        failureFlash : true
+        successRedirect: '/',
+        failureRedirect: '/register',
+        failureFlash: true
     }));
 
     router.get('/login', function (req, res, next) {
-        res.render('login.hbs', { title: 'Log in', messages: req.flash('loginMessage')});
+        res.render('login.hbs', { title: 'Log in', messages: req.flash('loginMessage') });
     });
-    
+
     router.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/',
-        failureRedirect : '/login',
-        failureFlash : true
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
     }));
 
-    router.get('/logout', function(req,res){
+    router.get('/logout', function (req, res) {
         req.logout();
         res.redirect('/');
     });
