@@ -23,12 +23,14 @@ module.exports = {
     getBlogPosts: function (res, pageData, callback) {
         var pageNumber = pageData.pageNumber === undefined ? 1 : pageData.pageNumber;
         var totalPages;
-        blogPost.paginate({},{page: pageNumber, limit: 5, sort: {date : -1}}).then( function(result){
-            postData = result.docs;
-            postData.page = result.page;
-            postData.totalPages = result.pages;
-            postData.isFirstPage = result.page == 1;
-            postData.isLastPage = result.page == result.pages;
+        blogPost.paginate({},{page: pageNumber, limit: 5, sort: {date : -1}}).then(function(result){
+            postData = [];
+            postData = JSON.parse(JSON.stringify(result.docs));
+            pageData.page = result.page;
+            pageData.totalPages = result.pages;
+            postData.forEach((post,index, array) => {
+                array[index].content = fs.readFileSync(("./data/blog/"+post.page_slug+"/content.md"),"UTF-8");
+            });
             pageData.postData = postData;
             callback(res,pageData);
         });

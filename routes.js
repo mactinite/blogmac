@@ -36,12 +36,10 @@ module.exports = function (passport) {
         pageData = {
             template: "index.hbs",
             title: "Blog",
-            pageNumber: req.query.page,
             user : req.user,
             isAuthenticated : req.isAuthenticated(),
-            postData: {} //filled in the getBlogPosts method
         };
-        blogTools.getBlogPosts(res, pageData, renderPage);
+        res.render(pageData.template, pageData);
     });
 
     //Render the new post page
