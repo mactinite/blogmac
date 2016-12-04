@@ -27,5 +27,10 @@
         margin:0px;
         margin-left: auto;
     }
-
+    .site-title{
+        a{  
+            color: $primary-color;
+            text-decoration: none;
+        }
+    }
 }

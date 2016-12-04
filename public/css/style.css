@@ -133,3 +133,6 @@ code {
     margin-left: auto; }
     .site-header .user-info p {
       margin: auto; }
+  .site-header .site-title a {
+    color: #d4d4d4;
+    text-decoration: none; }
