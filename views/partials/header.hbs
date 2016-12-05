@@ -1,11 +1,18 @@
 <div class="u-full-width site-header">
-<h1 class="site-title"><a href="/">{{title}}</a></h1>
-{{#if isAuthenticated}}
-<div class="user-info">
-    <p>Hello <span id="username">{{user.username}}</span></p>
-    <a href="/logout">Logout</a>
-    <a href="/new-post">New Post</a>
-</div>
-{{/if}}
-
+    <div class="container">
+        <div class="row">
+            <div class="site-title u-pull-left">
+                <h2 class="title"><a href="/">{{title}}</a></h2>
+                <p class="sub-title">{{sub_title}}</a></p>
+            </div>
+            {{#if isAuthenticated}}
+            <ul class="header-group u-pull-right">
+                <li><span>Hello, {{user.username}}!</span></li>
+                <li class="vertical-line"></li>
+                <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                <li><a href="/new-post"><i class="fa fa-plus" aria-hidden="true"></i> New Post</a></li>
+            </ul>
+            {{/if}}
+        </div>
+    </div>
 </div>

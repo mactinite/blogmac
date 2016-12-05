@@ -124,15 +124,48 @@ code {
   align-items: center;
   padding-left: 10%;
   padding-right: 10%; }
-  .site-header .user-info {
-    margin: 0.67em 0; }
-  .site-header h1 {
-    margin: 0px; }
-  .site-header .user-info {
+  .site-header .site-title {
+    height: 100%; }
+    .site-header .site-title .title {
+      margin: 0px;
+      padding: 0px; }
+      .site-header .site-title .title a {
+        color: #d4d4d4;
+        text-decoration: none; }
+    .site-header .site-title .sub-title {
+      margin: 0px;
+      margin-top: -5px;
+      padding: 0px;
+      color: #bbbbbb; }
+  .site-header ul.header-group {
+    list-style-type: none;
     margin: 0px;
-    margin-left: auto; }
-    .site-header .user-info p {
-      margin: auto; }
-  .site-header .site-title a {
-    color: #d4d4d4;
-    text-decoration: none; }
+    padding: 0px;
+    overflow: hidden;
+    display: block;
+    height: 100%; }
+    .site-header ul.header-group li {
+      margin: 0px;
+      float: left;
+      padding: 0;
+      height: 100%; }
+      .site-header ul.header-group li a {
+        display: block;
+        height: 100%;
+        font-size: 1.25em;
+        text-align: center;
+        line-height: 65px;
+        padding: 5px 5px;
+        text-decoration: none;
+        color: #d4d4d4; }
+        .site-header ul.header-group li a:hover {
+          background-color: #d4d4d4;
+          color: black; }
+      .site-header ul.header-group li span {
+        display: block;
+        height: 100%;
+        font-size: 1em;
+        text-align: center;
+        line-height: 65px;
+        padding: 5px 10px;
+        color: #d4d4d4; }

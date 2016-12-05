@@ -14,8 +14,9 @@ module.exports = function (passport) {
         pageData = {
             template: "blog-post.hbs",
             title: "Blog",
+            sub_title: "Where I ramble about things.",
             slug :req.params.page_slug,
-            user: req.user,
+            user: req.user,       
             isAuthenticated: req.isAuthenticated(),
         };
         res.render(pageData.template,pageData);
@@ -25,8 +26,9 @@ module.exports = function (passport) {
     router.get('/blog-post', function (req, res, next) {
         pageData = {
             template: "blog-post.hbs",
-            title: "Blog", //filled in the getBlogPost method
-            postData: {} //filled in the getBlogPost method
+            title: "Blog",
+            sub_title: "Where I ramble about things.",
+            postData: {}
         };
         blogTools.getBlogPost(req.query.page_slug).then(data => {
             res.setHeader('Content-Type', 'application/json');
@@ -51,6 +53,7 @@ module.exports = function (passport) {
         pageData = {
             template: "index.hbs",
             title: "Blog",
+            sub_title: "Where I ramble about things.",
             user: req.user,
             isAuthenticated: req.isAuthenticated(),
         };
@@ -62,6 +65,7 @@ module.exports = function (passport) {
         pageData = {
             template: "new_post",
             title: "Blog",
+            sub_title: "Create a New Post",
             slug :req.params.page_slug,
             user: req.user,
             isAuthenticated: req.isAuthenticated(),

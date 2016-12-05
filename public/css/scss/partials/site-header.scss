@@ -14,23 +14,60 @@
     align-items: center;
     padding-left: 10%;
     padding-right: 10%;
-    .user-info {
-        margin: 0.67em 0;
-    }
-    h1{
-        margin: 0px;
-    }
-    .user-info{
-        p{
-            margin : auto;
+    .site-title {
+        height: 100%;
+        .title{
+            margin: 0px;
+            padding: 0px;
+            a {
+                color: $primary-color;
+                text-decoration: none;
+            }
         }
-        margin:0px;
-        margin-left: auto;
+        .sub-title{
+            margin: 0px;
+            margin-top: -5px;
+            padding: 0px;
+            color: darken($primary-color, 10%);
+        }
+        
+
     }
-    .site-title{
-        a{  
-            color: $primary-color;
-            text-decoration: none;
+    ul.header-group {
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+        display: block;
+        height: 100%;
+        li {
+            margin: 0px;
+            float: left;
+            padding: 0;
+            height: 100%;
+            a {
+                display: block;
+                height: 100%;
+                &:hover {
+                    background-color: $primary-color;
+                    color: black;
+                }
+                font-size: 1.25em;
+                text-align: center;
+                line-height: 65px;
+                padding: 5px 5px;
+                text-decoration: none;
+                color: $primary-color;
+            }
+            span {
+                display: block;
+                height: 100%;
+                font-size: 1em;
+                text-align: center;
+                line-height: 65px;
+                padding: 5px 10px;
+                color: $primary-color;
+            }
         }
     }
 }
