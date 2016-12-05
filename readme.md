@@ -6,13 +6,13 @@ I am currently building this blogging platform (soon to be CMS?) for personal us
 Features
 ----
 ###### 1st version features (I will publish my personal blog with these features)
-[x] User Authentication and Registration
-[x] Markdown based blogposts with code syntax highlighting
-[x] Ajax based front end (for endless scrolling)
-[] Admin interface (Assigning roles, sending registration invites)
-[] Configuration interface (Changing global site values, changing site behavior)
-[] Initial Configuration scripts
-[] Custom Pages
+- [x] User Authentication and Registration
+- [x] Markdown based blogposts with code syntax highlighting
+- [x] Ajax based front end (for endless scrolling)
+- [ ] Admin interface (Assigning roles, sending registration invites)
+- [ ] Configuration interface (Changing global site values, changing site behavior)
+- [ ] Initial Configuration scripts
+- [ ] Custom Pages
 
 
 Setup
