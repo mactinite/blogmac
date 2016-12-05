@@ -3,6 +3,17 @@
 
 I am currently building this blogging platform (soon to be CMS?) for personal use.
 
+Features
+----
+###### 1st version features (I will publish my personal blog with these features)
+[x] User Authentication and Registration
+[x] Markdown based blogposts with code syntax highlighting
+[x] Ajax based front end (for endless scrolling)
+[] Admin interface (Assigning roles, sending registration invites)
+[] Configuration interface (Changing global site values, changing site behavior)
+[] Initial Configuration scripts
+[] Custom Pages
+
 
 Setup
 ----
@@ -23,6 +34,6 @@ To set up:
     };
     ```
 5. Run ```npm run dev``` to start nodemon
-6. You're up and running, you will still need to create a user and give him the right permission level via your mongodb conmfiguration interface. (TODO: Make this not stupid)
+6. You're up and running, you will still need to create a user and give him the right permission level via your mongodb configuration interface. (TODO: Make this not stupid)
 
 
