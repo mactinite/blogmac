@@ -8,5 +8,66 @@
 @import "partials/post-editor.scss";
 @import "partials/site-header.scss";
 
+.mono-button{
+    transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.25s;
+    display: block;
+    height: 30px;
+    text-decoration: none;
+    color : black;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 1.25em;
+    &:hover{
+        cursor : pointer;
+        cursor : hand;
+        color : white;
+        background-color: $secondary-color;
+    }
+
+}
+
+//Working on navigation!
+.vertical-nav.light{
+    list-style-type: none;
+    li{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 1.25em;
+        overflow: hidden;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        a{
+            transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.25s;
+            display: block;
+            height: 30px;
+            text-decoration: none;
+            color : black;
+            background-color: white;
+            width: 100%;
+            &:hover{
+                color : white;
+                background-color: $secondary-color;
+            }
+        }
+        &:first-child{
+            border-radius: 3px 3px 0px 0px;
+            margin-top: 0;
+            border-top: 1px solid black;
+        }
+        &:last-child{
+            border-radius: 0px 0px 3px 3px;
+            margin-top: 0;
+            border-bottom: 1px solid black;
+        }
+
+    }
+
+}
+
 //Third-party
 //Nothing yet!

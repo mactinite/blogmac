@@ -16,6 +16,7 @@ module.exports = function (passport) {
     //load render modules
     require("./render/render-blog")(passport, router);
     require("./render/render-auth")(passport,router);
+    require("./render/render-admin")(passport, router);
     
     return router;
 };
