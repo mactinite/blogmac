@@ -17,6 +17,8 @@ var session = require('express-session');
 var hbsHelpers = require("./handlebarsHelpers"); // Custom Handlebars Helpers
 var configDB = require('./config/database.js');
 
+global.appRoot = path.resolve(__dirname);
+
 mongoose.connect(configDB.url);
 
 //data models
@@ -26,7 +28,7 @@ require('./models/users');
 require('./config/passport')(passport); 
 
 //routes
-var routes = require('./routes')(passport);
+var routes = require('./routes/routes.js')(passport);
 
 var app = express();
 
