@@ -12,6 +12,7 @@ module.exports = function (passport) {
     //load api modules
     require("./api/blog")(passport, router);
     require("./api/auth")(passport,router);
+    require("./api/admin")(passport,router);
 
     //load render modules
     require("./render/render-blog")(passport, router);

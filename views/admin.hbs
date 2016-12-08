@@ -1,4 +1,4 @@
-<div class="row">
+<div ng-app="admin" class="row">
     <div class="three columns">
         <h1>Settings</h1>
         <ul class="vertical-nav light">
@@ -11,7 +11,7 @@
     <div class="nine columns">
         <h1>User Admin</h1>
         <hr/>
-        <table class="u-full-width">
+        <table ng-controller="usersController" ng-init="getUsers()" class="u-full-width">
             <thead>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -19,28 +19,28 @@
                 <th>Role</th>
                 <th></th>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Hunter</td>
-                    <td>MacDonald</td>
-                    <td>mactinite</td>
+            <tbody >
+                <tr ng-repeat="user in users">
+                    <td>{[{user.firstName}]}</td>
+                    <td>{[{user.lastName}]}</td>
+                    <td>{[{user.username}]}</td>
                     <td>
-                        <select>
-                            <option value="0">Admin</option>
-                            <option value="1">Web Master</option>
-                            <option value="2">Editor</option>
-                            <option value="3">Author</option>
-                            <option value="4">Read-only</option>
+                        <select ng-options="idx*1 as role for (idx,role) in roles" ng-model="user.role" >
                         </select>
                     </td>
                     <td>
-                        <i href class="fa fa-user"></i>
-                        <i href class="fa fa-check"></i>
-                        <i href class="fa fa-ban"></i>
+                        <i class="fa fa-user fa-lg"></i>
+                        <i class="fa fa-check fa-lg"></i>
+                        <i class="fa fa-ban fa-lg"></i>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="1"><Label for="NewUser">Invite a new user</Label></td>
+                    <td colspan="3" ><input class="u-full-width" type="email" name="NewUser" placeholder="Enter email for invite"/> </td>
+                    <td colspan="1" class="text-center"><i class="fa fa-plus-circle fa-2x"></i></td>
                 </tr>
             </tbody>
         </table>
     </div>
-
 </div>
+<script type="text/javascript" src="/javascripts/admin.js"></script>
