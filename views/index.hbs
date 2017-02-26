@@ -1,6 +1,7 @@
 <div class="row">
     <div class="twelve columns">
         <div ng-app="blogPosts" ng-controller="blogPostsController" ng-init="getBlogData(1)">
+            <div id="fsLoader" ng-show="loading" class="loading">Loading&#8230;</div>
             <div ng-repeat="post in blogData">
                 <article class="blog-post">
                     <header>

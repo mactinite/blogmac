@@ -26,17 +26,20 @@ blogPosts.config(function ($interpolateProvider) {
     $interpolateProvider.endSymbol('}]}');
 });
 
-blogPosts.controller("blogPostsController", ["$scope", "$http", function ($scope, $http) {
+blogPosts.controller("blogPostsController", ["$document","$rootScope","$scope", "$http", function ($document,$rootScope,$scope, $http) {
     $scope.nextPage = 1;
     $scope.isLastPage = $scope.currentPage >= $scope.pages;
     $scope.blogData = [];
-
+    $scope.loading = false;
     $scope.getBlogData = function (pagenumber) {
+        $rootScope.$broadcast("SPINNER_START");
         var req = {
             method: 'GET',
             url: '/blog-posts?page=' + pagenumber,
         };
         $http(req).then(function (res, status, headers, config) {
+            $rootScope.$broadcast("SPINNER_END");
+
             if (res.data.error != null) {
                 $scope.error = res.data.error;
             }
@@ -66,4 +69,12 @@ blogPosts.controller("blogPostsController", ["$scope", "$http", function ($scope
             
         });
     };
+
+    $rootScope.$on("SPINNER_START", function(){
+        $scope.loading = true;
+    });
+
+    $rootScope.$on("SPINNER_END", function(){
+        $scope.loading = false;
+    });
 }]);
