@@ -6,8 +6,8 @@ module.exports = function (passport) {
     var router = express.Router();
 
     //Set up some global variables
-    global.appName = "___'s Blog";
-
+    global.app_name = "___'s Blog";
+    global.tag_line = "Where I ramble about things.";
 
     //load api modules
     require("./api/blog")(passport, router);

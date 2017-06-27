@@ -8,8 +8,9 @@ module.exports = function (passport, router) {
     router.get('/register', function (req, res, next) {
         pageData = {
             template: "register",
-            title: appName,
-            sub_title: "Register",
+            title: app_name,
+            sub_title: tag_line,
+            page_title: "Register",
             slug: req.params.page_slug,
             user: req.user,
             isAuthenticated: req.isAuthenticated(),
@@ -20,8 +21,9 @@ module.exports = function (passport, router) {
     router.get('/login', function (req, res, next) {
         pageData = {
             template: "login",
-            title: appName,
-            sub_title: "Log in",
+            title: app_name,
+            sub_title: tag_line,
+            page_title : "Login",
             slug: req.params.page_slug,
             user: req.user,
             isAuthenticated: req.isAuthenticated(),

@@ -9,8 +9,8 @@ module.exports = function (passport,router) {
     router.get('/blog-post/:page_slug', function (req, res, next) {
         pageData = {
             template: "blog-post.hbs",
-            title: appName,
-            sub_title: "Where I ramble about things.",
+            title: app_name,
+            sub_title: tag_line,
             slug: req.params.page_slug,
             user: req.user,
             isAuthenticated: req.isAuthenticated(),
@@ -22,8 +22,8 @@ module.exports = function (passport,router) {
     router.get('/', function (req, res, next) {
         pageData = {
             template: "index.hbs",
-            title: appName,
-            sub_title: "Where I ramble about things.",
+            title: app_name,
+            sub_title: tag_line,
             user: req.user,
             isAuthenticated: req.isAuthenticated(),
         };
@@ -34,8 +34,9 @@ module.exports = function (passport,router) {
     router.get('/new-post', isLoggedIn, function (req, res, next) {
         pageData = {
             template: "new_post",
-            title: "Blog",
-            sub_title: "Create a New Post",
+            title: app_name,
+            sub_title: tag_line,
+            page_title: "New Post",
             slug: req.params.page_slug,
             user: req.user,
             isAuthenticated: req.isAuthenticated(),

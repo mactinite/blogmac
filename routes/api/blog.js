@@ -11,7 +11,7 @@ module.exports = function (passport,router) {
     router.get('/blog-post', function (req, res, next) {
         pageData = {
             template: "blog-post.hbs",
-            title: appName,
+            title: app_name,
             sub_title: "Where I ramble about things.",
             postData: {}
         };

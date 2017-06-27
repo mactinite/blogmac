@@ -8,7 +8,7 @@ module.exports = function (passport,router) {
         router.get('/admin', isLoggedIn,function (req, res, next) {
         pageData = {
             template: "admin.hbs",
-            title: appName,
+            title: app_name,
             sub_title: "Admininstration",
             postData: {}
         };
