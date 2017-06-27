@@ -16,7 +16,7 @@ module.exports = {
             .exec((err, post) => {
                 if (!post) {
                     reject({error : "No Such Post Exists!"});
-                } else {
+                } else {                    
                     post.content = fs.readFileSync(("./data/blog/" + post.page_slug + "/content.md"), "UTF-8");
                     resolve(post);
                 }

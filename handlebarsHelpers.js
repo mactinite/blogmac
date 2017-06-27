@@ -33,6 +33,11 @@ module.exports = {
             return marked(content);
         });
 
+        hbs.registerHelper('current-year', function(modifier){
+            var d = new Date();
+            return(d.getFullYear());
+        })
+
         hbs.registerHelper('md', function (filepath) {
             var str = fs.readFileSync(filepath, 'utf8');
             return new hbs.handlebars.SafeString(marked(str));

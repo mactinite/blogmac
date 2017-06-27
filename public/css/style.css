@@ -76,11 +76,12 @@ form {
     form .user-forms input[type="submit"] {
       margin-top: 15px; }
 
-.body {
-  margin: 0px;
+html,
+body {
+  margin: 0;
   padding: 0px;
   height: 100%;
-  background-color: #e2f1f1; }
+  background-color: #d4d4d4; }
 
 code {
   background-color: #20201d;
@@ -275,6 +276,25 @@ code {
         line-height: 65px;
         padding: 5px 10px;
         color: #d4d4d4; }
+
+footer {
+  color: #d4d4d4;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+  background-color: #20201d; }
+
+.footer,
+.push {
+  height: 75px; }
+
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -75px; }
 
 .mono-button {
   transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.25s;
