@@ -26,26 +26,34 @@ module.exports = function (passport, router) {
         });
     });
 
-    router.get('/admin/createUserRole', isLoggedIn, (req, res) => {
-
-        var roleData = new UserRole();
-        var roleData = {
-            name: req.body.role_name,
-            permissions: {
-                write: req.body.can_write,
-                edit: req.body.can_edit,
-                delete: req.body.can_delete,
-                admin: req.body.is_admin
-            }
-        };
-        addUserRole(role).then((resp) => {
+    router.post('/admin/deleteUserRole', isLoggedIn, (req, res) => {
+        deleteUserRole(req.body.role_id).then((resp) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(resp));
         })
-        .catch(e =>{
+            .catch(e => {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(JSON.stringify(e));
+            });
+    });
+
+    router.post('/admin/createUserRole', isLoggedIn, (req, res) => {
+        var roleData = new UserRole();
+        roleData.name = req.body.role_name;
+        roleData.permissions = {
+            write: req.body.can_write,
+            edit: req.body.can_edit,
+            delete: req.body.can_delete,
+            admin: req.body.is_admin
+        };
+        addUserRole(roleData).then((resp) => {
             res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(e));            
-        });
+            res.send(JSON.stringify(resp));
+        })
+            .catch(e => {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(JSON.stringify(e));
+            });
     });
 
 };
@@ -100,6 +108,19 @@ function getAllUserRoles() {
 function addUserRole(role) {
     return new Promise((resolve, reject) => {
         role.save(err => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve({ status: 'SUCCESS' });
+            }
+        });
+    });
+}
+
+function deleteUserRole(id) {
+    return new Promise((resolve, reject) => {
+        UserRole.deleteOne({'_id' : id}, err => {
             if (err) {
                 reject(err);
             }

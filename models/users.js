@@ -18,7 +18,7 @@ var User = new Schema({
     hash: String,
     salt: String,
     signed_up: Date,
-    role : Number
+    role : String
 });
 
 User.methods.setPassword = function(password){

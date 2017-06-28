@@ -5,16 +5,33 @@ admin.config(function ($interpolateProvider) {
     $interpolateProvider.endSymbol('}]}');
 });
 
-admin.controller("adminController", ["$scope","$http", function ($scope, $http) {
+admin.controller("adminController", ["$scope", "$http", function ($scope, $http) {
     $scope.currentView = "Users";
-    
-    $scope.setView = function(view){
+
+    $scope.setView = function (view) {
         $scope.currentView = view;
     }
+
+    $scope.getRoles = function () {
+        var req = {
+            method: 'GET',
+            url: '/admin/getAllUserRoles',
+        };
+        $http(req).then(function (res, status, headers, config) {
+            if (res.data.error != null) {
+                $scope.error = res.data.error;
+            }
+            else {
+                $scope.roles = res.data;
+            }
+        })
+    }
+
+    $scope.getRoles();
 }]);
 
-admin.controller("usersController", ["$scope","$http", function ($scope, $http) {
-  
+admin.controller("usersController", ["$scope", "$http", function ($scope, $http) {
+
 
     $scope.getUsers = function () {
         var req = {
@@ -27,27 +44,70 @@ admin.controller("usersController", ["$scope","$http", function ($scope, $http) 
             }
             else {
                 $scope.users = res.data;
+                $scope.users.forEach(function(user) {
+                    user.role ={_id: user.role};                  
+                }, this);
             }
         });
     };
 
 }]);
 
-admin.controller("configController", ["$scope","$http", function ($scope, $http) {
-    
+admin.controller("configController", ["$scope", "$http", function ($scope, $http) {
+
     $scope.roles = {};
-    
-    $scope.getRoles = function () {
+
+    $scope.roleName = "";
+    $scope.canWrite = false;
+    $scope.canEdit = false;
+    $scope.canDelete = false;
+    $scope.isAdmin = false;
+
+    $scope.addRole = function () {
         var req = {
-            method: 'GET',
-            url:'/admin/getAllUserRoles',
+            method: 'POST',
+            url: '/admin/createUserRole',
+            headers: { 'Content-Type': 'application/json' },
+            data: {
+                role_name: $scope.roleName,
+                can_write: $scope.canWrite,
+                can_edit: $scope.canEdit,
+                can_delete: $scope.canDelete,
+                is_admin: $scope.isAdmin,
+            }
         };
-        $http(req).then(function (res, status, headers, config){
-            if(res.data.error !=null){
+        $http(req).then(function (res, status, headers, config) {
+            if (res.data.error != null) {
                 $scope.error = res.data.error;
             }
-            else{
-                $scope.roles = res.data;
+            else {
+                $scope.getRoles();
+                $scope.roleName = "";
+                $scope.canWrite = false;
+                $scope.canEdit = false;
+                $scope.canDelete = false;
+                $scope.isAdmin = false;
+                $scope.roleAddedSuccess = true;
+            }
+        })
+    }
+
+    $scope.removeRole = function (id) {
+        var req = {
+            method: 'POST',
+            url: '/admin/deleteUserRole',
+            headers: { 'Content-Type': 'application/json' },
+            data: {
+                role_id: id,
+            }
+        };
+        $http(req).then(function (res, status, headers, config) {
+            if (res.data.error != null) {
+                $scope.error = res.data.error;
+            }
+            else {
+                $scope.getRoles();
+                $scope.roleDeletedSuccess = true;
             }
         })
     }
