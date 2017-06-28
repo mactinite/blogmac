@@ -1,46 +1,86 @@
-<div ng-app="admin" class="row">
+<div ng-app="admin" ng-controller="adminController"class="row">
     <div class="three columns">
         <h1>Settings</h1>
         <ul class="vertical-nav light">
-            <li><a href="/">Users</a></li>
-            <li><a href="/">Posts</a></li>
-            <li><a href="/">Pages</a></li>
-            <li><a href="/">Config</a></li>
+            <li><a href="" ng-click="setView('Users')">Users</a></li>
+            <li><a href="" ng-click="setView('Posts')">Posts</a></li>
+            <li><a href="" ng-click="setView('Pages')">Pages</a></li>
+            <li><a href="" ng-click="setView('Config')">Config</a></li>
         </ul>
     </div>
     <div class="nine columns">
-        <h1>User Admin</h1>
-        <hr/>
-        <table ng-controller="usersController" ng-init="getUsers()" class="u-full-width">
-            <thead>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>User Name</th>
-                <th>Role</th>
-                <th></th>
-            </thead>
-            <tbody >
-                <tr ng-repeat="user in users">
-                    <td>{[{user.firstName}]}</td>
-                    <td>{[{user.lastName}]}</td>
-                    <td>{[{user.username}]}</td>
-                    <td>
-                        <select ng-options="idx*1 as role for (idx,role) in roles" ng-model="user.role" >
-                        </select>
-                    </td>
-                    <td>
-                        <i class="fa fa-user fa-lg"></i>
-                        <i class="fa fa-check fa-lg"></i>
-                        <i class="fa fa-ban fa-lg"></i>
-                    </td>
+        <div ng-show="currentView=='Users'" ng-controller="usersController">
+            <h1>User Admin</h1>
+            <hr/>
+            <table ng-init="getUsers()" class="u-full-width">
+                <thead>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>User Name</th>
+                    <th>Role</th>
+                    <th></th>
+                </thead>
+                <tbody >
+                    <tr ng-repeat="user in users">
+                        <td>{[{user.firstName}]}</td>
+                        <td>{[{user.lastName}]}</td>
+                        <td>{[{user.username}]}</td>
+                        <td>
+                            <select ng-options="idx*1 as role for (idx,role) in roles" ng-model="user.role" >
+                            </select>
+                        </td>
+                        <td>
+                            <i class="fa fa-user fa-lg"></i>
+                            <i class="fa fa-check fa-lg"></i>
+                            <i class="fa fa-ban fa-lg"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1"><Label for="NewUser">Invite a new user</Label></td>
+                        <td colspan="3" ><input class="u-full-width" type="email" name="NewUser" placeholder="Enter email for invite"/> </td>
+                        <td colspan="1" class="text-center"><i class="fa fa-plus-circle fa-2x"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="currentView=='Posts'">
+            <h1>Edit Posts</h1>
+            <hr/>
+        </div>
+        <div ng-show="currentView=='Pages'">
+            <h1>Edit Pages</h1>
+            <hr/>
+        </div>
+        <div ng-controller="configController" ng-show="currentView=='Config'">
+            <h1>Configuration</h1>
+            <hr/>
+            <label for='blog_name'>Blog Name</label>
+            <input type="text" placeholder="{{title}}" id="blog_name"></input> <button>Save</button>
+            <label for='tag_line'>Tag Line</label> 
+            <input type="text" placeholder="{{sub_title}}" id="tag_line"></input> <button>Save</button>
+
+            <h5>Administration</h5>
+            <hr/>
+            <h6>User Roles</h6>
+            <table ng-init="getRoles()" class="u-full-width">
+                <thead>
+                    <th>Role</th>
+                    <th>write</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                    <th>admin</th>
+                </thead>
+                <tr ng-repeat="role in roles">
+                    <td>{[{role.name}]}</td>
+                    <td>{[{role.permissions.write}]}</td>
+                    <td>{[{role.permissions.edit}]}</td>
+                    <td>{[{role.permissions.delete}]}</td>
+                    <td>{[{role.permissions.admin}]}</td>
                 </tr>
-                <tr>
-                    <td colspan="1"><Label for="NewUser">Invite a new user</Label></td>
-                    <td colspan="3" ><input class="u-full-width" type="email" name="NewUser" placeholder="Enter email for invite"/> </td>
-                    <td colspan="1" class="text-center"><i class="fa fa-plus-circle fa-2x"></i></td>
-                </tr>
-            </tbody>
-        </table>
+            </table>
+
+            
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="/javascripts/admin.js"></script>

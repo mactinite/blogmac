@@ -24,6 +24,7 @@ mongoose.connect(configDB.url);
 //data models
 require('./models/posts');
 require('./models/users');
+require('./models/user-roles');
 
 require('./config/passport')(passport); 
 
@@ -46,7 +47,6 @@ app.use(flash());
 //register helpers
 hbsHelpers.registerHelpers();
 hbs.registerPartials(__dirname + '/views/partials');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

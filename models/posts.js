@@ -8,7 +8,11 @@ var BlogPost = new Schema({
     author    : String,
     title     : String,
     date      : Date,
-    dateLastEdited : Date
+    lastEdited: Date,
+    content   :{
+        markdown : String,
+        html : String,
+    }
 });
 
 BlogPost.plugin(mongoosePaginate);

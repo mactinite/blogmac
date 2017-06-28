@@ -5,8 +5,17 @@ admin.config(function ($interpolateProvider) {
     $interpolateProvider.endSymbol('}]}');
 });
 
+admin.controller("adminController", ["$scope","$http", function ($scope, $http) {
+    $scope.currentView = "Users";
+    
+    $scope.setView = function(view){
+        $scope.currentView = view;
+    }
+}]);
+
 admin.controller("usersController", ["$scope","$http", function ($scope, $http) {
-    $scope.roles = ['Admin', 'Web Master', 'Editor', 'Author','Read-only','Not Activated'];
+  
+
     $scope.getUsers = function () {
         var req = {
             method: 'GET',
@@ -22,4 +31,24 @@ admin.controller("usersController", ["$scope","$http", function ($scope, $http) 
         });
     };
 
+}]);
+
+admin.controller("configController", ["$scope","$http", function ($scope, $http) {
+    
+    $scope.roles = {};
+    
+    $scope.getRoles = function () {
+        var req = {
+            method: 'GET',
+            url:'/admin/getAllUserRoles',
+        };
+        $http(req).then(function (res, status, headers, config){
+            if(res.data.error !=null){
+                $scope.error = res.data.error;
+            }
+            else{
+                $scope.roles = res.data;
+            }
+        })
+    }
 }]);
