@@ -1,11 +1,12 @@
 var express = require('express');
 var Promise = require('promise');
 var util = require('util');
+var authMW = require(appRoot + '/blog/auth-middleware.js');
 
 
 module.exports = function (passport,router) {
 
-    router.get('/admin', isLoggedIn,function (req, res, next) {
+    router.get('/admin', authMW.MatchPermissions(['admin']) ,function (req, res, next) {
         pageData = {
             template: "admin.hbs",
             title: app_name,
@@ -17,13 +18,3 @@ module.exports = function (passport,router) {
     });
 
 };
-
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}

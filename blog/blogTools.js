@@ -5,6 +5,7 @@ var util = require('util');
 mongoose.Promise = Promise;
 
 var blogPost = mongoose.model("BlogPost");
+var UserRole = mongoose.model('UserRole');
 require('promise/lib/rejection-tracking').enable();
 
 module.exports = {
@@ -43,11 +44,6 @@ module.exports = {
     writeBlogPost: function (req, res) {
         console.log(req.body);
         var newPost = new blogPost();
-
-        if (req.user.role >= 2) {
-            res.send({ error: "Not enough permissions!" });
-            return console.error("User " + req.user.email + " does not have enough permissions to post.");
-        }
 
         if (req.body.title !== null || req.body.title !== "") {
             newPost.title = req.body.title; //create a slug based on this. Must be unique for the content folder name.

@@ -37,6 +37,17 @@ module.exports = function (passport, router) {
             });
     });
 
+    router.post('/admin/updateDefaultRole', isLoggedIn, (req, res) => {
+        setDefaultRole(req.body.role_id).then((resp) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify(resp));
+        })
+        .catch(e => {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify(e));
+        });
+    });
+
     router.post('/admin/createUserRole', isLoggedIn, (req, res) => {
         var roleData = new UserRole();
         roleData.name = req.body.role_name;
@@ -120,7 +131,7 @@ function addUserRole(role) {
 
 function deleteUserRole(id) {
     return new Promise((resolve, reject) => {
-        UserRole.deleteOne({'_id' : id}, err => {
+        UserRole.deleteOne({ '_id': id }, err => {
             if (err) {
                 reject(err);
             }
@@ -128,5 +139,24 @@ function deleteUserRole(id) {
                 resolve({ status: 'SUCCESS' });
             }
         });
+    });
+}
+
+function setDefaultRole(id) {
+    return new Promise((resolve, reject) => {
+        UserRole.update({ default: true }, { default: false }, (err) => {
+            if (err) {
+                reject({ error: "Couldn't change default role" });
+            }
+            UserRole.update({ _id: id }, { default: true }, (err) => {
+                if (err) {
+                    reject({ error: "Couldn't change default role" });
+                }
+                else {
+                    resolve({ status: "SUCCESS" });
+                }
+            });
+        })
+
     });
 }

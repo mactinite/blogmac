@@ -1,6 +1,7 @@
 var express = require('express');
 var Promise = require('promise');
 var util = require('util');
+var authMW = require(appRoot + '/blog/auth-middleware.js');
 
 
 module.exports = function (passport, router) {
@@ -32,13 +33,3 @@ module.exports = function (passport, router) {
     });
 
 };
-
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}

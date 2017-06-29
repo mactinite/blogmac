@@ -1,0 +1,42 @@
+<div class="panel" ng-controller="configController" ng-show="currentView=='Config'">
+    <h1 class="panel-header" >Configuration</h1>
+    <hr/>
+    <label for='blog_name'>Blog Name</label>
+    <input type="text" ng-model='blogName' placeholder="{{title}}" id="blog_name"></input> <button>Save</button>
+    <label for='tag_line'>Tag Line</label>
+    <input type="text" ng-model='tagLine' placeholder="{{sub_title}}" id="tag_line"></input> <button>Save</button>
+
+    <h5>Administration</h5>
+    <hr/>
+    <label for="default-role">Default User Role</label>
+    <select id="default-role" ng-model="defaultRole" ng-change="setDefaultRole()"ng-options="role as role.name for role in $parent.roles track by role._id" ></select>
+    <p>This is the role that is selected by default for new users</p>
+    <table class="u-full-width">
+        <thead>
+            <th>Role</th>
+            <th>Write</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Admin</th>
+            <th></th>
+        </thead>
+        <tr ng-repeat="role in $parent.roles">
+            <td>{[{role.name}]}</td>
+            <td>{[{role.permissions.write}]}</td>
+            <td>{[{role.permissions.edit}]}</td>
+            <td>{[{role.permissions.delete}]}</td>
+            <td>{[{role.permissions.admin}]}</td>
+            <td class="text-center"><button class="u-full-width" ng-click="removeRole(role._id)">Delete</button></td>
+        </tr>
+        <tr>
+            <td><input ng-model="roleName" class="u-full-width" placeholder="Role name" type="text" /></td>
+            <td><input ng-model="canWrite" type="checkbox" /></td>
+            <td><input ng-model="canEdit" type="checkbox" /></td>
+            <td><input ng-model="canDelete" type="checkbox" /></td>
+            <td><input ng-model="isAdmin" type="checkbox" /></td>
+            <td class="text-center"><button class="u-full-width" ng-click="addRole()">Create</button>
+        </tr>
+    </table>
+
+
+</div>

@@ -140,3 +140,23 @@ code {
     transform: rotate(360deg);
   }
 }
+
+.panel {
+        width: 100%;
+        background-color: lightgrey;
+        border-radius: 3px;      
+        margin-bottom: 10px;
+        -webkit-box-shadow: -10px 10px 0px -3px rgba(0,0,0,0.75);
+        -moz-box-shadow: -10px 10px 0px -3px rgba(0,0,0,0.75);
+        box-shadow: -10px 10px 0px -3px rgba(0,0,0,0.75);
+        padding: 5px;
+        border: 5px solid $secondary-color;
+        border-style: double; 
+        h1.panel-header{
+            background-color: $secondary-color;
+            margin: -5px;
+            margin-bottom: 0px;
+            top :0px;            
+            color: $background-color;
+        }
+}  

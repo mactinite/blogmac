@@ -22,7 +22,13 @@ admin.controller("adminController", ["$scope", "$http", function ($scope, $http)
                 $scope.error = res.data.error;
             }
             else {
+                
                 $scope.roles = res.data;
+                $scope.roles.forEach(role=>{
+                    if(role.default === true){
+                        $scope.defaultRole = role;
+                    }
+                })
             }
         })
     }
@@ -88,6 +94,25 @@ admin.controller("configController", ["$scope", "$http", function ($scope, $http
                 $scope.canDelete = false;
                 $scope.isAdmin = false;
                 $scope.roleAddedSuccess = true;
+            }
+        })
+    }
+
+    $scope.setDefaultRole = function(){
+        var req = {
+            method: 'POST',
+            url: '/admin/updateDefaultRole',
+            headers: { 'Content-Type': 'application/json' },
+            data: {
+                role_id: $scope.defaultRole,
+            }
+        };
+        $http(req).then(function (res, status, headers, config) {
+            if (res.data.error != null) {
+                $scope.error = res.data.error;
+            }
+            else {
+                $scope.getRoles();
             }
         })
     }

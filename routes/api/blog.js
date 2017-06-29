@@ -2,6 +2,7 @@ var express = require('express');
 var blogTools = require(appRoot + '/blog/blogTools.js');
 var Promise = require('promise');
 var util = require('util');
+var authMW = require(appRoot + '/blog/auth-middleware.js');
 
 module.exports = function (passport,router) {
 
@@ -38,17 +39,7 @@ module.exports = function (passport,router) {
     /* Submit new posts to the database
     *  Responds with JSON
     */
-    router.post("/new-post/submit-post", isLoggedIn, function (req, res) {
+    router.post("/new-post/submit-post", authMW.MatchPermissions(['write']), function (req, res) {
         blogTools.writeBlogPost(req, res);
     });
 };
-
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}

@@ -1,6 +1,7 @@
 var express = require('express');
 var Promise = require('promise');
 var util = require('util');
+var authMW = require(appRoot + '/blog/auth-middleware.js');
 
 
 module.exports = function (passport,router) {
@@ -31,7 +32,7 @@ module.exports = function (passport,router) {
     });
 
     //Render the new post page
-    router.get('/new-post', isLoggedIn, function (req, res, next) {
+    router.get('/new-post', authMW.MatchPermissions(['write']), function (req, res, next) {
         pageData = {
             template: "new_post",
             title: app_name,
@@ -44,13 +45,3 @@ module.exports = function (passport,router) {
         res.render(pageData.template, pageData);
     });
 };
-
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
