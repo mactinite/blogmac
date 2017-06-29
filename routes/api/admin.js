@@ -1,13 +1,14 @@
 var express = require('express');
 var Promise = require('promise');
 var util = require('util');
+var authMW = require(appRoot + '/blog/auth-middleware.js');
 
 var mongoose = require("mongoose");
 var User = mongoose.model("User");
 var UserRole = mongoose.model("UserRole");
 
 module.exports = function (passport, router) {
-    router.get("/admin/getAllUsers", isLoggedIn, (req, res) => {
+    router.get("/admin/users", authMW.MatchPermissions(['admin']), (req, res) => {
         getAllUsers().then((users) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(users));
@@ -16,7 +17,7 @@ module.exports = function (passport, router) {
             res.send(JSON.stringify(e));
         });
     });
-    router.get("/admin/getAllUserRoles", isLoggedIn, (req, res) => {
+    router.get("/admin/userroles", authMW.MatchPermissions(['admin']), (req, res) => {
         getAllUserRoles().then((roles) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(roles));
@@ -26,7 +27,7 @@ module.exports = function (passport, router) {
         });
     });
 
-    router.post('/admin/deleteUserRole', isLoggedIn, (req, res) => {
+    router.post('/admin/userroles/delete', authMW.MatchPermissions(['admin']), (req, res) => {
         deleteUserRole(req.body.role_id).then((resp) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(resp));
@@ -37,7 +38,7 @@ module.exports = function (passport, router) {
             });
     });
 
-    router.post('/admin/updateDefaultRole', isLoggedIn, (req, res) => {
+    router.post('/admin/defaultrole', authMW.MatchPermissions(['admin']), (req, res) => {
         setDefaultRole(req.body.role_id).then((resp) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(resp));
@@ -48,7 +49,7 @@ module.exports = function (passport, router) {
         });
     });
 
-    router.post('/admin/createUserRole', isLoggedIn, (req, res) => {
+    router.post('/admin/userroles/new', authMW.MatchPermissions(['admin']), (req, res) => {
         var roleData = new UserRole();
         roleData.name = req.body.role_name;
         roleData.permissions = {
@@ -68,16 +69,6 @@ module.exports = function (passport, router) {
     });
 
 };
-
-function isLoggedIn(req, res, next) {
-
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
-
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
 
 
 function getAllUsers() {

@@ -15,7 +15,7 @@ admin.controller("adminController", ["$scope", "$http", function ($scope, $http)
     $scope.getRoles = function () {
         var req = {
             method: 'GET',
-            url: '/admin/getAllUserRoles',
+            url: '/admin/userroles',
         };
         $http(req).then(function (res, status, headers, config) {
             if (res.data.error != null) {
@@ -42,7 +42,7 @@ admin.controller("usersController", ["$scope", "$http", function ($scope, $http)
     $scope.getUsers = function () {
         var req = {
             method: 'GET',
-            url: '/admin/getAllUsers',
+            url: '/admin/users',
         };
         $http(req).then(function (res, status, headers, config) {
             if (res.data.error != null) {
@@ -72,7 +72,7 @@ admin.controller("configController", ["$scope", "$http", function ($scope, $http
     $scope.addRole = function () {
         var req = {
             method: 'POST',
-            url: '/admin/createUserRole',
+            url: '/admin/userroles/new',
             headers: { 'Content-Type': 'application/json' },
             data: {
                 role_name: $scope.roleName,
@@ -101,7 +101,7 @@ admin.controller("configController", ["$scope", "$http", function ($scope, $http
     $scope.setDefaultRole = function(){
         var req = {
             method: 'POST',
-            url: '/admin/updateDefaultRole',
+            url: '/admin/defaultrole',
             headers: { 'Content-Type': 'application/json' },
             data: {
                 role_id: $scope.defaultRole,
@@ -120,7 +120,7 @@ admin.controller("configController", ["$scope", "$http", function ($scope, $http
     $scope.removeRole = function (id) {
         var req = {
             method: 'POST',
-            url: '/admin/deleteUserRole',
+            url: '/admin/userroles/delete',
             headers: { 'Content-Type': 'application/json' },
             data: {
                 role_id: id,
