@@ -1,5 +1,5 @@
 # BlogMac
-### a blogging platform built on NodeJS, Express, and Mongoose
+### Another blogging platform / CMS built on NodeJS, Express, and Mongoose
 
 I am currently building this blogging platform (soon to be CMS?) for personal use.
 
@@ -7,10 +7,20 @@ Features
 ----
 ###### 1st version features (I will publish my personal blog with these features)
 - [x] User Authentication and Registration
+    - [x] Extensible permissions system (partial)
+    - [ ] Login
+    - [ ] Registration
 - [x] Markdown based blogposts with code syntax highlighting
 - [x] Ajax based front end (for endless scrolling)
-- [ ] Admin interface (Assigning roles, sending registration invites)
+- [ ] Admin interface
+    - [x] Managing user roles
+    - [ ] Manage users
+    - [ ] Sending registration invites
+    - [ ] Manage Blog Posts
+    - [ ] Manage Custom Pages (DEPENDENCY: Custom Pages)
+    - [ ] Statistics Dashboard
 - [ ] Configuration interface (Changing global site values, changing site behavior)
+- [ ] Completely RESTful API (partial for v1)
 - [ ] Initial Configuration scripts
 - [ ] Custom Pages
 
