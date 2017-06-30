@@ -1,13 +1,8 @@
-var express = require('express');
-var Promise = require('promise');
-var util = require('util');
-var authMW = require(appRoot + '/util/auth-middleware.js');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
-var mongoose = require("mongoose");
-var User = mongoose.model("User");;
-
-module.exports = function (passport, router) {
-    router.get("/admin/users", authMW.MatchPermissions(['admin']), (req, res) => {
+var actions = {
+    GetAll: function (req, res) {
         getAllUsers().then((users) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(users));
@@ -15,8 +10,18 @@ module.exports = function (passport, router) {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(e));
         });
+    },
+    GetByEmail: function (req, res) {
+        res.send('NOT IMPLEMENTED: User ' + req.params.email + ' details')
+    },
+}
+
+
+function getUser(id) {
+    return new Promise((resolve, reject) => {
+        User.findById
     });
-};
+}
 
 function getAllUsers() {
     return new Promise((resolve, reject) => {
@@ -32,5 +37,6 @@ function getAllUsers() {
                 }
             });
     });
-
 }
+
+module.exports = actions;
