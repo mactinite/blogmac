@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="twelve columns">
+        <markdown ng-app="blogPosts" ng-controller="blogPostsController" ng-init="getBlogPostData('{{slug}}')">
+            
+            <article class="blog-post">
+                <header>
+                    <div class="blog-title">
+                        <h2>{[{blogPostData.title}]}</h2>
+                        <p><small>By {[{blogPostData.author}]} on {[{blogPostData.date | date}]} </small></p>
+                    </div>
+
+                </header>
+                <section class="post-content">
+                    <div marked="blogPostData.content"></div>
+                </section>
+            </article>
+    </div>
+</div>
+<script type="text/javascript" src="/js/blog-posts.js"></script>

@@ -1,0 +1,35 @@
+<p>Create a blog post using markdown. Here's a <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Cheatsheet</a>.</p>
+<section ng-app="markedApp" ng-controller="markedController as marked">
+    <div class="flash" ng-if="message">
+        <div ng-bind="message " class="message error"></div>
+    </div>
+    <article class="blog-post">
+        <header>
+            <div class="blog-title">
+                <h2>{{page_title}}</h2>
+            </div>
+        </header>
+        
+        <section class="post-content">
+            <label for="title">Post title: </label>
+            <input class="u-full-width" type="text" ng-model="marked.title" id="title" />
+            <p>by <strong>{{user.username}}</strong></p>
+            <textarea id="md-editor" ng-model="marked.inputText"></textarea>
+            <div id="post-preview">
+                <a href ng-hide="marked.showPreview" ng-click="marked.showPreview = true">Preview &#9654;</a>
+                <a href ng-show="marked.showPreview" ng-click="marked.showPreview = false">Preview &#9660;</a>
+            </div>
+            <div ng-show="marked.showPreview">
+                <hr/>
+                <div id="compiled-markdown" ng-bind-html="marked.outputText"></div>
+            </div>
+
+            <a class="button button-primary u-full-width" value="Save" ng-click="Submit()">Submit</a>
+        </section>
+    </article>
+    </div>
+
+
+    <script type="text/javascript" src="js/post-editor.js">
+
+    </script>
