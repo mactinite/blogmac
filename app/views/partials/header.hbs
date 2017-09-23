@@ -1,20 +1,20 @@
-
-
-<div class="u-full-width site-header">
-    <div class="container">
-        <div class="row">
-            <div class="site-title u-pull-left">
-                <h2 class="title"><a href="/">{{title}}</a></h2>
-                <p class="sub-title">{{sub_title}}</a></p>
-            </div>
-            {{#if isAuthenticated}}
-            <ul class="header-group u-pull-right">
-                <li><span>Hello, {{user.username}}!</span></li>
-                <li class="vertical-line"></li>
-                <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
-                <li><a href="/new-post"><i class="fa fa-plus" aria-hidden="true"></i> New Post</a></li>
-            </ul>
-            {{/if}}
+<nav class="navbar is-black">
+    <div class="navbar-brand">
+        <div class="navbar-item">
+                <p class="title"><a href="/">{{title}}</a></p>
+        </div>
+        <div class="burger navbar-burger" data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
-</div>
+    <div class="navbar-menu" id="navMenu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="/">Blog</a>
+            <a class="navbar-item" href="/">About</a>
+            <a class="navbar-item" href="/">Contact</a>  
+        </div>
+    </div>
+
+</nav>

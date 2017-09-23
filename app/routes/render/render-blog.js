@@ -43,5 +43,5 @@ module.exports = function (passport,router) {
             isAuthenticated: req.isAuthenticated(),
         };
         res.render(pageData.template, pageData);
-    });
+    });``
 };

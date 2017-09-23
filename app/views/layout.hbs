@@ -3,9 +3,8 @@
 
 <head>
   <title>{{title}} | {{sub_title}}</title>
-  <link rel='stylesheet' href='/css/skeleton.css' />
+  <link rel='stylesheet' href='/css/bulma.css' />
   <link rel='stylesheet' href='/css/style.css' />
-  <link rel='stylesheet' href='/css/normalize.css' />
   <link rel='stylesheet' href='/css/atelier-dune-dark.css' />
   <link rel="stylesheet" href="/css/font-awesome.min.css">
 
@@ -15,17 +14,12 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
 
   <script src="/js/angular-marked.min.js"></script>
+  <script src="/js/app.js"></script>
 </head>
 
 <body>
-  <div class="wrapper">
   {{> header}}
-     <div class="container">
-      {{{body}}}
-      
-    </div>
-    <div class="push"><!--ay, back up --></div>
-  </div>
+    {{{body}}}
   {{> footer}}
 </body>
 

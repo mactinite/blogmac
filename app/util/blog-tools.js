@@ -55,7 +55,7 @@ module.exports = {
         newPost.date = new Date();
         newPost.author = req.user.username;
 
-        var path = "./data/blog/",
+        var path = "./public/data/blog/",
             slug = slugify(newPost.title),
             bodyContent = req.body.content.toString(),
             count = 0;

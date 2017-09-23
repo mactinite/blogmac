@@ -1,32 +1,50 @@
-<p>Create a blog post using markdown. Here's a <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Cheatsheet</a>.</p>
-<section ng-app="markedApp" ng-controller="markedController as marked">
-    <div class="flash" ng-if="message">
-        <div ng-bind="message " class="message error"></div>
-    </div>
-    <article class="blog-post">
-        <header>
-            <div class="blog-title">
-                <h2>{{page_title}}</h2>
-            </div>
-        </header>
-        
-        <section class="post-content">
-            <label for="title">Post title: </label>
-            <input class="u-full-width" type="text" ng-model="marked.title" id="title" />
-            <p>by <strong>{{user.username}}</strong></p>
-            <textarea id="md-editor" ng-model="marked.inputText"></textarea>
-            <div id="post-preview">
-                <a href ng-hide="marked.showPreview" ng-click="marked.showPreview = true">Preview &#9654;</a>
-                <a href ng-show="marked.showPreview" ng-click="marked.showPreview = false">Preview &#9660;</a>
-            </div>
-            <div ng-show="marked.showPreview">
+<section class="section" ng-app="markedApp" ng-controller="markedController as marked">
+    <div class="container">
+        <div class="notification is-warning" ng-if="message">
+            <p ng-bind="message"></p>
+        </div>
+        <h4 class="title is-4">{{page_title}}</h2>
+        <h6 class="subtitle is-6">Create a blog post using markdown. Here's a <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Cheatsheet</a>.</h3>
+
+        <div class="tabs is-toggle is-centered is-small">
+            <ul>
+                <li ng-class="{'is-active' : !marked.showPreview}" ng-click="marked.showPreview = false">
+                    <a>
+                    <span class="icon is-small"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span>Edit</span>
+                    </a>
+                </li>
+                <li ng-class="{'is-active' : marked.showPreview}" ng-click="marked.showPreview = true">
+                    <a>
+                    <span class="icon is-small"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                    <span>Preview</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="container bottom-m-10">
+            <section ng-hide="marked.showPreview" class="post-content bottom-m-10">
+                <div class="field">
+                    <label class="label" for="title">Post title: </label>
+                    <input class="input" type="text" ng-model="marked.title" id="title" />
+                </div>
+                <p>by <strong>{{user.username}}</strong></p>
+                <textarea class="textarea" id="md-editor" ng-model="marked.inputText"></textarea>
+
+            </section>
+
+            <div class="" ng-show="marked.showPreview">
                 <hr/>
-                <div id="compiled-markdown" ng-bind-html="marked.outputText"></div>
+                <div class="content is-small" id="compiled-markdown" ng-bind-html="marked.outputText"></div>
             </div>
 
-            <a class="button button-primary u-full-width" value="Save" ng-click="Submit()">Submit</a>
-        </section>
-    </article>
+            <div class="level">
+                <div class="level-item has-text-centered">
+                    <a class="button is-primary" value="Save" ng-click="Submit()">Submit</a>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
 

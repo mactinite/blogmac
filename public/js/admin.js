@@ -11,7 +11,7 @@ admin.controller("adminController", ["$scope", "$http", function ($scope, $http)
     $scope.setView = function (view) {
         $scope.currentView = view;
     }
-
+    
     $scope.getRoles = function () {
         var req = {
             method: 'GET',

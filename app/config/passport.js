@@ -40,7 +40,7 @@ module.exports = function (passport) {
                         newUser.signedUp = new Date();
                         newUser.setPassword(password);
 
-                        UserRole.findOne({ default: true }, function(err, role){
+                        UserRole.findOne({ default: true }, function (err, role) {
                             if (role) {
                                 newUser.role = role['_doc']._id;
                                 newUser.save(function (err) {
@@ -49,7 +49,7 @@ module.exports = function (passport) {
                                 });
                             }
                             else {
-                               return done(null, false, req.flash('signupMessage', 'Default role not set up'));
+                                return done(null, false, req.flash('signupMessage', 'Default role not set up'));
                             }
                         });
 

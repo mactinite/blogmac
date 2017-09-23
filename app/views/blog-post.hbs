@@ -1,19 +1,16 @@
-<div class="row">
-    <div class="twelve columns">
-        <markdown ng-app="blogPosts" ng-controller="blogPostsController" ng-init="getBlogPostData('{{slug}}')">
-            
-            <article class="blog-post">
-                <header>
-                    <div class="blog-title">
-                        <h2>{[{blogPostData.title}]}</h2>
-                        <p><small>By {[{blogPostData.author}]} on {[{blogPostData.date | date}]} </small></p>
-                    </div>
-
-                </header>
-                <section class="post-content">
-                    <div marked="blogPostData.content"></div>
-                </section>
-            </article>
+<div class="section">
+    <div class="container">
+        <markdown ng-app="blogPosts" ng-controller="blogPostsController" ng-init="getBlogPostData('{{slug}}')"/>
+        <div class="columns is-centered">
+            <div class="box column is-two-thirds">
+                <h3 class="title is-3" ng-bind="blogPostData.title">                </h3>
+                <h4 class="subtitle is-4">
+                    <small>By <span ng-bind="blogPostData.author"></span> on {[{blogPostData.date | date}]}</span></small>
+                </h4>
+                <hr/>
+                <div class="content is-small" marked="blogPostData.content"></div>
+            </div>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="/js/blog-posts.js"></script>

@@ -1,25 +1,43 @@
-<div class="row">
-    <div class="offset-by-three six columns">
-        <div class="form-container">
-            {{#if messages}}
-            <div class="flash">
-                <div class="message error">{{messages}}</div>
-            </div>
-            {{/if}}
-            <form action="/login" method="post">
-                <div class="user-forms">
-                    <h1 class="form-header">
-                        {{page_title}}
-                    </h1>
-                    <label for="email">Email</label>
-                    <input class="u-full-width" placeholder="email" id="email" name="email" type="email" />
-
-                    <label for="password">Password</label>
-                    <input class="u-full-width" placeholder="password" id="password" name="password" type="password" />
-
-                    <input class="button-primary u-full-width" type="submit" value="Login" />
+<div class="section">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="box column is-half is-narrow">
+                {{#if messages}}
+                <div class="notification is-warning">
+                    {{messages}}
                 </div>
-            </form>
+                {{/if}}
+
+                <h1 class="title">
+                    {{page_title}}
+                </h1>
+
+                <form action="/login" method="post">
+                    <div class="user-forms">
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input" placeholder="email" id="email" name="email" type="email" />
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input" placeholder="password" id="password" name="password" type="password" />
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="level">
+                            <div class="level-item has-tyext-centered">
+                                <input class="button is-primary" type="submit" value="Login" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

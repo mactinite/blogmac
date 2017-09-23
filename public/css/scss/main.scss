@@ -1,74 +1,43 @@
-//Variables and Modules//
-@import "modules/constants.scss";
-
-//Partials
-@import "partials/blog-post.scss";
-@import "partials/forms.scss";
-@import "partials/general.scss";
-@import "partials/post-editor.scss";
-@import "partials/site-header.scss";
-@import "partials/site-footer.scss";
-
-.mono-button{
-    transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.25s;
-    display: block;
-    height: 30px;
-    text-decoration: none;
-    color : black;
-    background-color: white;
-    border-radius: 3px;
-    border: 1px solid black;
-    text-align: center;
-    font-size: 1.25em;
-    &:hover{
-        cursor : pointer;
-        cursor : hand;
-        color : white;
-        background-color: $secondary-color;
-    }
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: inherit !important;
+  -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
-//Working on navigation!
-.vertical-nav.light{
-    list-style-type: none;
-    li{
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        font-size: 1.25em;
-        overflow: hidden;
-        border-left: 1px solid black;
-        border-right: 1px solid black;
-        border-bottom: 1px solid black;
-        a{
-            transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.25s;
-            display: block;
-            height: 30px;
-            text-decoration: none;
-            color : black;
-            background-color: white;
-            width: 100%;
-            &:hover{
-                color : white;
-                background-color: $secondary-color;
-            }
-        }
-        &:first-child{
-            border-radius: 3px 3px 0px 0px;
-            margin-top: 0;
-            border-top: 1px solid black;
-        }
-        &:last-child{
-            border-radius: 0px 0px 3px 3px;
-            margin-top: 0;
-            border-bottom: 1px solid black;
-        }
-
-    }
-
+pre{
+  background: #292824;
+  color: white;
+  border-radius: 3px;
 }
 
-//Third-party
-//Nothing yet!
+$sizes: (0,10,15,20,25,30,50);
+$positions: ('top','left','bottom','right');
+
+@each $size in $sizes {
+  @each $position in $positions{
+    .#{$position}-m-#{$size} {
+      margin-#{$position}: $size + px;
+    }
+    .#{$position}-p-#{$size} {
+      padding-#{$position}: $size + px;
+    }
+  }
+}
+
+@each $size in $sizes {
+  .m-#{$size} {
+    margin: $size + px;
+  }
+  .p-#{$size} {
+    padding: $size + px;
+  }
+}

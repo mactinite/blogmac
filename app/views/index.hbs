@@ -1,25 +1,24 @@
-<div class="row">
-    <div class="twelve columns">
-        <div ng-app="blogPosts" ng-controller="blogPostsController" ng-init="getBlogData(1)">
-            <div id="fsLoader" ng-show="loading" class="loading">Loading&#8230;</div>
-            <div ng-repeat="post in blogData">
-                <article class="blog-post">
-                    <header>
-                        <div class="blog-title post-highlight">
-                            <h2>
-                                <a href="/blog-post/{[{post.page_slug}]}">{[{post.title}]}</a>
-                            </h2>
-                            <p><small>By <span ng-bind="post.author"></span> on {[{post.date | date}]}</span></small></p>
-                        </div>
-
-                    </header>
-                    <section class="post-content">
-                        <div marked="post.content"></div marked>
-                    </section>
-                </article>
+<div class="section">
+    <div ng-app="blogPosts" ng-controller="blogPostsController" ng-init="getBlogData(1)" class="container">
+        <div id="fsLoader" ng-show="loading" class="loading">Loading&#8230;</div>
+        <div ng-repeat="post in blogData" class="">
+            <div class="box bottom-m-50">
+                    <h5 class="title is-5">
+                        <a href="/blog-post/{[{post.page_slug}]}" ng-bind="post.title"></a>
+                    </h5>
+                    <h6 class="subtitle is-6">
+                        <p><small>By <span ng-bind="post.author"></span> on {[{post.date | date}]}</span></small></p>
+                    </h6>
+                    <div class="content is-small" marked="post.content"></div>
             </div>
-            <div ng-show="isLastPage" class="u-full-width text-center text-light">No more posts!</div>
-            <a href class="mono-button u-full-width" ng-click="getBlogData(nextPage)" ng-hide="isLastPage"> Load More Posts</a>
+        </div>
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <a href class="button is-outlined is-small" ng-click="getBlogData(nextPage)" ng-disabled="isLastPage" ng-class="{loading:'is-loading'}">
+                    <div ng-hide="isLastPage" class="level-item">Load More</div>
+                    <div ng-show="isLastPage" class="level-item">No more posts!</div>
+                </a>
+            </div>
         </div>
     </div>
 </div>
