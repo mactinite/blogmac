@@ -13,7 +13,7 @@ module.exports = function (passport) {
     }).catch(e =>{
         global.app_name = "Null Blog"
     });
-    configuration.getConfiguration("tag_name").then(result =>{
+    configuration.getConfiguration("tag_line").then(result =>{
         global.tag_line = result.value;
     }).catch(e =>{
         global.tag_line = "Null tag line"

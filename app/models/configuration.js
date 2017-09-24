@@ -14,13 +14,23 @@ Configuration.statics.updateConfiguration = function(configuration, new_value){
     configuration = configuration + "";
     return new Promise((resolve, reject) => {
         if (validator.isAscii(new_value)) {
-            query = {key : configuration};
-            this.update(query,{ $set :{ value : new_value}},(err) =>{
-                if(err){
-                    reject({error : "Database error, please try again later."});
-                }
-                else{
-                    resolve({value: new_value , status : "SUCCESS"});
+            var query = {key : configuration},
+            update = {value : new_value},
+            options = {upsert : true};
+
+            this.findOneAndUpdate(query, update, options,(err, result) =>{                
+                if(!err){
+                    if(!result){
+                        result = new this();
+                    }
+                    result.save(function(err){
+                        if(!err){
+                            resolve({value: new_value , status : "SUCCESS"});
+                        }
+                        else{
+                            reject({error : "Database error, please try again later."});
+                        }
+                    })
                 }
             });
         }
