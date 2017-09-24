@@ -1,13 +1,23 @@
 var express = require('express');
 var Promise = require('promise');
 var util = require('util');
+var mongoose = require("mongoose");
+var configuration = mongoose.model("Configuration");
 
 module.exports = function (passport) {
     var router = express.Router();
 
     //Set up some global variables
-    global.app_name = "___'s Blog";
-    global.tag_line = "Where I ramble about things.";
+    configuration.getConfiguration("site_name").then(result =>{
+        global.app_name = result.value;
+    }).catch(e =>{
+        global.app_name = "Null Blog"
+    });
+    configuration.getConfiguration("tag_name").then(result =>{
+        global.tag_line = result.value;
+    }).catch(e =>{
+        global.tag_line = "Null tag line"
+    });
 
     //load api modules
     require("./api/blog")(passport, router);

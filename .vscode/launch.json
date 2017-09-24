@@ -14,11 +14,12 @@
                 "js,hbs",
                 "--debug=5858"
             ],
-            "program": "${workspaceRoot}/\\bin\\www",
+            "program": "${workspaceRoot}\\bin\\www",
             "restart": true,
             "port": 5858,
             "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "protocol" : "legacy"
         }
     ]
 }

@@ -5,19 +5,19 @@
         <label class="label" for='blog_name'>Blog Name</label>
         <div class="field has-addons">
             <div class="control is-expanded">
-                <input class="input" type="text" ng-model='blogName' placeholder="{{title}}" id="blog_name"></input>
+                <input class="input" type="text" ng-model='blogName' reset-state="blog_name_save" placeholder="{{title}}" id="blog_name"></input>
             </div>
             <div class="control">
-                <button class="button is-info">Save</button>
+                <button class="button is-info" id="blog_name_save" ng-click="setBlogName();">Save</button>
             </div>
         </div>
         <label class="label" for='tag_line'>Tag Line</label>
         <div class="field has-addons">
             <div class="control is-expanded">
-                <input class="input" type="text" ng-model='tagLine' placeholder="{{sub_title}}" id="tag_line"></input>
+                <input class="input" type="text" ng-model='tagLine' reset-state="tag_line_save" placeholder="{{sub_title}}" id="tag_line"></input>
             </div>
             <div class="control">
-                <button class="button is-info">Save</button>
+                <button id="tag_line_save" class="button is-info" ng-click="setTagLine();">Save</button>
             </div>
         </div>
     </div>

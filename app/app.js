@@ -27,7 +27,7 @@ mongoose.connect(configDB.url);
 require('./models/posts');
 require('./models/users');
 require('./models/user-roles');
-
+require('./models/configuration');
 require('./config/passport')(passport); 
 
 //routes
