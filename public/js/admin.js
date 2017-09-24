@@ -101,7 +101,7 @@ admin.controller("configController", ["$scope", "$http", function ($scope, $http
     $scope.setDefaultRole = function(){
         var req = {
             method: 'POST',
-            url: '/admin/defaul-trole',
+            url: '/admin/default-role',
             headers: { 'Content-Type': 'application/json' },
             data: {
                 role_id: $scope.defaultRole,

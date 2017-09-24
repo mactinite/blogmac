@@ -35,7 +35,7 @@ blogPosts.controller("blogPostsController", ["$document","$rootScope","$scope", 
         $rootScope.$broadcast("SPINNER_START");
         var req = {
             method: 'GET',
-            url: '/blog-posts?page=' + pagenumber,
+            url: '/blog/blog-posts?page=' + pagenumber,
         };
         $http(req).then(function (res, status, headers, config) {
             $rootScope.$broadcast("SPINNER_END");
@@ -57,7 +57,7 @@ blogPosts.controller("blogPostsController", ["$document","$rootScope","$scope", 
     $scope.getBlogPostData = function(pageSlug){
         var req = {
             method: 'GET',
-            url: '/blog-post?page_slug=' + pageSlug
+            url: '/blog/blog-post?page_slug=' + pageSlug
         };
         $http(req).then(function(res,status,headers,config){
             if(res.data.error != null){

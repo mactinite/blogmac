@@ -18,7 +18,7 @@ module.exports = {
                 if (!post) {
                     reject({error : "No Such Post Exists!"});
                 } else {                    
-                    post.content = fs.readFileSync(("./public/data/blog/" + post.page_slug + "/content.md"), "UTF-8");
+                    post.content = fs.readFileSync(("./data/blog/" + post.page_slug + "/content.md"), "UTF-8");
                     resolve(post);
                 }
             });
@@ -27,11 +27,11 @@ module.exports = {
     },
     getBlogPosts: function (pageNumber) {
         return new Promise(function (resolve, reject) {
-            blogPost.paginate({}, { page: pageNumber, leanWithId: true, lean: true, limit: 5, sort: { date: -1 } }).then(result => {
+            blogPost.paginate({}, { page: pageNumber, leanWithId: true, lean: true, limit: 4, sort: { date: -1 } }).then(result => {
                 var postData = result.docs;
                 pageData.totalPages = result.pages;
                 postData.forEach((post, index, array) => {
-                        array[index].content = fs.readFileSync(("./public/data/blog/" + post.page_slug + "/content.md"), "UTF-8");
+                        array[index].content = fs.readFileSync(("./data/blog/" + post.page_slug + "/content.md"), "UTF-8");
                 });
                 pageData.postData = postData;
                 resolve(pageData);

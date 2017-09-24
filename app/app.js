@@ -13,9 +13,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var cookieSession = require('cookie-session');
 
 var hbsHelpers = require("./util/handlebars-helpers.js"); // Custom Handlebars Helpers
 var configDB = require('./config/database.js');
+var validator = require('validator');
 
 global.appRoot = path.resolve(__dirname);
 
@@ -38,7 +40,11 @@ app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'hbs');
 
 //required for passport
-app.use(session({secret : "thisisareallylongsecret"}));
+app.use(cookieSession({
+  name: 'session',
+  secret : "thisisareallylongsecret",
+  maxAge: 24 * 60 * 60 * 1000
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

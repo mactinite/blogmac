@@ -34,7 +34,7 @@ markedApp.controller('markedController', ['$scope', '$http', function ($scope, $
     $scope.Submit = function () {
         var req = {
             method: 'POST',
-            url: '/new-post/submit-post',
+            url: 'blog/new-post/submit-post',
             headers: {
                 'Content-Type': 'application/json'
             },

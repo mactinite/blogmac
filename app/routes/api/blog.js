@@ -9,7 +9,7 @@ module.exports = function (passport,router) {
     /* GET BlogPost where ?page_slug matches db.
     *  Responds with JSON 
     */
-    router.get('/blog-post', function (req, res, next) {
+    router.get('/blog/blog-post', function (req, res, next) {
         pageData = {
             template: "blog-post.hbs",
             title: app_name,
@@ -27,7 +27,7 @@ module.exports = function (passport,router) {
     /* GET BlogPosts at a specific page
     *  Responds with JSON 
     */
-    router.get('/blog-posts', function (req, res, next) {
+    router.get('/blog/blog-posts', function (req, res, next) {
         blogTools.getBlogPosts(req.query.page).then((pageData) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(pageData));
@@ -39,7 +39,7 @@ module.exports = function (passport,router) {
     /* Submit new posts to the database
     *  Responds with JSON
     */
-    router.post("/new-post/submit-post", authMW.MatchPermissions(['write']), function (req, res) {
+    router.post("blog/new-post/submit-post", authMW.MatchPermissions(['write']), function (req, res) {
         blogTools.writeBlogPost(req, res);
     });
 };

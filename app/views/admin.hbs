@@ -1,19 +1,48 @@
 <div ng-app="admin" ng-controller="adminController" class="section">
-    <h1>Settings</h1>
+
     <div class="container columns">
         <div class="column menu">
+            <p class="menu-label">Blog</p>
             <ul class="menu-list">
-                <li><a href="" ng-click="setView('Users')">Users</a></li>
-                <li><a href="" ng-click="setView('Posts')">Posts</a></li>
-                <li><a href="" ng-click="setView('Pages')">Pages</a></li>
-                <li><a href="" ng-click="setView('Config')">Config</a></li>
+                <li>
+                    <a href="" ng-class="{'is-active' : currentView=='Users'}" ng-click="setView('Users')">
+                        <span class="icon is-pulled-left right-m-20">
+                            <i class="fa fa-users"></i>
+                        </span>                        
+                        Users 
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-class="{'is-active' : currentView=='Posts'}" ng-click="setView('Posts')">
+                        <span class="icon is-pulled-left right-m-20">
+                            <i class="fa fa-file-text"></i>
+                        </span>                        
+                        Posts 
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-class="{'is-active' : currentView=='Pages'}" ng-click="setView('Pages')">
+                        <span class="icon is-pulled-left right-m-20">
+                            <i class="fa fa-file"></i>
+                        </span>                        
+                        Pages 
+                    </a>
+                </li>
+                </ul>
+                <p class="menu-label">Settings</p>
+                <ul class="menu-list">
+                <li>
+                    <a href="" ng-class="{'is-active' : currentView=='Config'}" ng-click="setView('Config')">
+                        <span class="icon is-pulled-left right-m-20">
+                            <i class="fa fa-cog"></i>
+                        </span>                        
+                        Config 
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="column box is-three-quarters">
-            {{> users}}
-            {{> posts}}
-            {{> pages}}
-            {{> config}}
+            {{> users}} {{> posts}} {{> pages}} {{> config}}
         </div>
     </div>
 </div>
