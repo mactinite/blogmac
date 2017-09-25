@@ -1,4 +1,65 @@
-<div ng-show="currentView=='Posts'">
-    <h1>Edit Posts</h1>
-    <hr/>
+<div ng-show="currentView=='Posts'" ng-init="getBlogData(1)">
+    <div class="bottom-m-25">
+        <h5 class="title is-5">Posts</h5>
+        <nav class="level">
+            <!-- Left side -->
+            <div class="level-left">
+                <div class="level-item">
+                    <p class="subtitle is-5">
+                        <strong ng-bind="blogData.length"></strong> posts
+                    </p>
+                </div>
+                <div class="level-item">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <input class="input" type="text" placeholder="Find a post">
+                        </p>
+                        <p class="control">
+                            <button class="button">
+                    Search
+                    </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Right side -->
+            <div class="level-right">
+                <p class="level-item"><strong>All</strong></p>
+                <p class="level-item"><a>Published</a></p>
+                <p class="level-item"><a>Drafts</a></p>
+                <p class="level-item"><a>Deleted</a></p>
+                <p class="level-item"><a href="/blog/new-post"class="button is-success">New</a></p>
+            </div>
+        </nav>
+        <hr/>
+        <!-- Main container -->
+
+        <div class="box" ng-repeat="post in blogData">
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <h3 class="title is-3" ng-bind="post.title"></h3>
+                        </a>
+
+                    </div>
+                    <div class="level-item">
+                        <div>
+                            <p class="is-size-7"> Written by {[{post.author}]} on {[{post.date | date}]}</p>
+                            <p class="is-size-7"> Last Edited on {[{post.lastEdited | date}]} by Editor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="level-right">
+                    <p class="field">
+                        <a class="button is-primary" ng-href="/blog/post/{[{post.page_slug}]}/edit">
+                            Edit
+                        </a>
+                        <a class="button is-danger" ng-click="deletePost($event,$index)">
+                            Delete
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

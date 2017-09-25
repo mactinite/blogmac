@@ -6,11 +6,58 @@ admin.config(function ($interpolateProvider) {
 });
 
 admin.controller("adminController", ["$scope", "$http", function ($scope, $http) {
-    $scope.currentView = "Users";
+    $scope.currentView = window.location.hash.slice(1);
+
+    $scope.getBlogData = function (pagenumber) {
+        if(!$scope.blogData){
+            $scope.blogData = [];
+        }
+        var req = {
+            method: 'GET',
+            url: '/blog/blog-posts?page=' + pagenumber,
+        };
+        $http(req).then(function (res, status, headers, config) {
+            if (res.data.error != null) {
+                $scope.error = res.data.error;
+            }
+            else {
+                $scope.blogData.push.apply($scope.blogData, res.data.postData);
+                $scope.pages = res.data.totalPages;
+                $scope.isLastPage = $scope.nextPage >= $scope.pages;
+                $scope.nextPage++;
+
+
+            }
+        });
+    };
+
+    $scope.deletePost = function(e, index){
+        var page_slug = $scope.blogData[index].page_slug;
+        var req = {
+            method: 'DELETE',
+            url: '/blog/blog-post/' + page_slug + '/delete',
+        };
+        angular.element(e.target).addClass("is-loading");
+        $http(req).then(function (res, status, headers, config) {
+            if (res.data.error != null) {
+                $scope.error = res.data.error;
+            }
+            else {
+                for(var i = 0; i < $scope.blogData.length; i++) {
+                    if ($scope.blogData[i].page_slug == page_slug) {
+                        $scope.blogData.splice(i,1);
+                        break;
+                    }
+                }
+            }
+            angular.element(e.target).removeClass("is-loading");
+        });
+    };
 
     $scope.setView = function (view) {
+        window.location.hash = '#'+view;
         $scope.currentView = view;
-    }
+    };
     
     $scope.getRoles = function () {
         var req = {
@@ -28,17 +75,17 @@ admin.controller("adminController", ["$scope", "$http", function ($scope, $http)
                     if(role.default === true){
                         $scope.defaultRole = role;
                     }
-                })
+                });
             }
-        })
-    }
+        });
+    };
 
     $scope.getRoles();
 }]);
 
 admin.controller("usersController", ["$scope", "$http", function ($scope, $http) {
 
-
+    
     $scope.getUsers = function () {
         var req = {
             method: 'GET',

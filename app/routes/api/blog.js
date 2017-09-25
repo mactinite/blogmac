@@ -51,4 +51,15 @@ module.exports = function (passport,router) {
             res.send(e);
         });
     });
+
+    router.delete('/blog/blog-post/:page_slug/delete',authMW.MatchPermissions(['write']), function (req, res, next) {
+        BlogPost.deleteBlogPost(req.params.page_slug, req.user.username, req.user.role_name).then((pageData) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify(pageData));
+        }).catch((e) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(e);
+        });
+    });
+
 };

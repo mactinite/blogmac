@@ -22,9 +22,11 @@ module.exports = {
                 var user = new User(req.user._doc);
                 UserRole.findById(user.role, (err, role) => {
                     permissions.forEach(function(permission) {
+                        req.user.role_name = role._doc.name;
                         if(!role._doc.permissions[permission])
                             res.redirect('/')
                     }, this);
+                   
                     return next();
                 });
             }

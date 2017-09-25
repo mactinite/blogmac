@@ -32,7 +32,7 @@ module.exports = function (passport,router) {
     });
 
     //Render the new post page
-    router.get('/new-post', authMW.MatchPermissions(['write']), function (req, res, next) {
+    router.get('/blog/new-post', authMW.MatchPermissions(['write']), function (req, res, next) {
         pageData = {
             template: "new_post",
             title: app_name,

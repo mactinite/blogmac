@@ -108,27 +108,31 @@ BlogPost.statics.updateBlogPost = function (page_slug, title, editor, markdown) 
 BlogPost.statics.deleteBlogPost = function (page_slug, user, user_role) {
     return new Promise((resolve, reject) => {
         var author = "";
-        this.findOne({'page_slug' : page_slug}, 'author', function(err, post){
-            if(!err){
+        this.findOne({'page_slug': page_slug }).lean().populate("blogpost")
+        .exec((err, post) => {
+            if(!err && post !=null){
                 author = post.author;
             }
             else{
-                reject(err);
+                reject({"error" : "Could not find post to delete."});
             }
 
-            if(user === author || user_role.toLowerCase() === "admin"){
+            if(user === author || user_role.toLowerCase() === "administrator"){
                 //DELETE POST
                 this.remove({'page_slug' : page_slug}, function(err){
                     if(!err){
                         resolve({'status' : 'success'});
                     }
                     else{
-                        reject(err);
+                        reject({"error" : "Could not find post to delete."});
                     }
                 });
             }
-
+            else{
+                reject({"error" : "You're not allowed to delete that."});
+            }
         });
+
     });
 };
 
