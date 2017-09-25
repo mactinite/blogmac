@@ -3,16 +3,24 @@
         <div class="columns is-multiline">
             <div ng-repeat="post in blogData" class="column" ng-class="{'is-12': $first, 'is-one-third': !$first}">
                 <article ng-if="!$first" class="box">
-                    <h5 class="title is-5">
-                        <a href="/blog-post/{[{post.page_slug}]}" ng-bind="post.title"></a>
-                    </h5>
-                    <h6 class="subtitle is-6">
-                        <p><small>By <span ng-bind="post.author"></span> on {[{post.date | date}]}</span></small></p>
-                    </h6>
-                    <figure class="image is-4by9">
-                        <img src="http://bulma.io/images/placeholders/640x480.png">
-                    </figure>
-                    <!--<div class="content is-small" marked="post.content"></div>-->
+                    <div class="columns is-multiline">
+                        <div class="column is-12">
+                            <h5 class="title is-5">
+                                <a href="/blog-post/{[{post.page_slug}]}" ng-bind="post.title"></a>
+                            </h5>
+                            <h6 class="subtitle is-6">
+                                <p><small>By <span ng-bind="post.author"></span> on {[{post.date | date}]}</span></small></p>
+                            </h6>
+                            <div class="content is-small article-small" ng-bind-html="post.content.html"></div>
+                        </div>
+                        <div class="column is-12 bottom-p-25 top-p-0">
+                            <div class="level">
+                                <div class="level-item has-text-centered">
+                                    <a href="/blog-post/{[{post.page_slug}]}" class="button is-outline is-small">Continue Reading</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </article>
 
                 <article ng-if="$first && !$last" class="hero is-small is-bold">
@@ -23,10 +31,7 @@
                         <h6 class="subtitle is-6">
                             <p><small>By <span ng-bind="post.author"></span> on {[{post.date | date}]}</span></small></p>
                         </h6>
-                        <div class="content is-small is-pulled-left" ng-bind-html="post.content.html"></div>
-                        <figure class="image is-4by9 is-pulled-right">
-                            <img src="https://via.placeholder.com/640x480.png">
-                        </figure>
+                        <div class="content is-normal is-pulled-left" ng-bind-html="post.content.html"></div>
                     </div>
                     <!--<div class="content is-small" marked="post.content"></div>-->
                 </article>

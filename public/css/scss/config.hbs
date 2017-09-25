@@ -1,0 +1,65 @@
+<div ng-controller="configController" ng-show="currentView=='Config'">
+    <div class="bottom-m-25">
+        <h5 class="title is-5">Configuration</h5>
+        <hr/>
+        <label class="label" for='blog_name'>Blog Name</label>
+        <div class="field has-addons">
+            <div class="control is-expanded">
+                <input class="input" type="text" ng-model='blogName' reset-state="blog_name_save" placeholder="{{title}}" id="blog_name"></input>
+            </div>
+            <div class="control">
+                <button class="button is-info" id="blog_name_save" ng-click="setBlogName();">Save</button>
+            </div>
+        </div>
+        <label class="label" for='tag_line'>Tag Line</label>
+        <div class="field has-addons">
+            <div class="control is-expanded">
+                <input class="input" type="text" ng-model='tagLine' reset-state="tag_line_save" placeholder="{{sub_title}}" id="tag_line"></input>
+            </div>
+            <div class="control">
+                <button id="tag_line_save" class="button is-info" ng-click="setTagLine();">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-m-25">
+    <h5 class="title is-5">Administration</h5>
+    <hr/>
+    <label for="default-role">Default User Role</label>
+    <div class="field">
+        <div class="control">
+            <div class="select">
+                <select id="default-role" ng-model="defaultRole" ng-change="setDefaultRole()" ng-options="role as role.name for role in $parent.roles track by role._id"></select>
+            </div>
+        </div>
+        <p class="help">This is the role that is selected by default for new users</p>
+    </div>
+
+    <table class="table is-fullwidth is-striped">
+        <thead>
+            <th>Role</th>
+            <th>Write</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Admin</th>
+            <th></th>
+        </thead>
+        <tr ng-repeat="role in $parent.roles">
+            <td>{[{role.name}]}</td>
+            <td>{[{role.permissions.write}]}</td>
+            <td>{[{role.permissions.edit}]}</td>
+            <td>{[{role.permissions.delete}]}</td>
+            <td>{[{role.permissions.admin}]}</td>
+            <td class="text-center"><button class="button is-outline" ng-click="removeRole(role._id)">Delete</button></td>
+        </tr>
+        <tr>
+            <td><input ng-model="roleName" class="input" placeholder="Role name" type="text" /></td>
+            <td><input ng-model="canWrite" type="checkbox" /></td>
+            <td><input ng-model="canEdit" type="checkbox" /></td>
+            <td><input ng-model="canDelete" type="checkbox" /></td>
+            <td><input ng-model="isAdmin" type="checkbox" /></td>
+            <td class="text-center"><button class="button is-outline" ng-click="addRole()">Create</button>
+        </tr>
+    </table>
+    </div>
+</div>

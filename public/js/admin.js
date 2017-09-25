@@ -5,8 +5,16 @@ admin.config(function ($interpolateProvider) {
     $interpolateProvider.endSymbol('}]}');
 });
 
+
+admin.controller("profileController", ["$scope", "$http", function ($scope, $http) {
+        
+    }]);
+
 admin.controller("adminController", ["$scope", "$http", function ($scope, $http) {
-    $scope.currentView = window.location.hash.slice(1);
+    
+    var hash = window.location.hash.slice(1);
+    $scope.currentView = hash != "" ? hash : "Users";
+    
 
     $scope.getBlogData = function (pagenumber) {
         if(!$scope.blogData){
