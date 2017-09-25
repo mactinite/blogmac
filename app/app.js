@@ -16,12 +16,12 @@ var session = require('express-session');
 var cookieSession = require('cookie-session');
 
 var hbsHelpers = require("./util/handlebars-helpers.js"); // Custom Handlebars Helpers
-var configDB = require('./config/database.js');
+var config = require('./config/config.js');
 var validator = require('validator');
 
 global.appRoot = path.resolve(__dirname);
 
-mongoose.connect(configDB.url);
+mongoose.connect(config.url);
 
 //data models
 require('./models/posts');
@@ -42,7 +42,7 @@ app.set('view engine', 'hbs');
 //required for passport
 app.use(cookieSession({
   name: 'session',
-  secret : "thisisareallylongsecret",
+  secret : config.cookieSecret,
   maxAge: 24 * 60 * 60 * 1000
 }));
 app.use(passport.initialize());
