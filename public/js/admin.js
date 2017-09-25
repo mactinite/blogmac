@@ -1,4 +1,4 @@
-var admin = angular.module("admin", []);
+var admin = angular.module("admin", ['ngSanitize']);
 
 admin.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('{[{');

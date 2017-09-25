@@ -1,5 +1,4 @@
 var express = require('express');
-var blogTools = require(appRoot + '/util/blog-tools.js');
 var Promise = require('promise')
 var util = require('util');
 

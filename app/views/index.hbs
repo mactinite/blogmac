@@ -23,7 +23,7 @@
                         <h6 class="subtitle is-6">
                             <p><small>By <span ng-bind="post.author"></span> on {[{post.date | date}]}</span></small></p>
                         </h6>
-                        <div class="content is-small is-pulled-left" marked="post.content"></div>
+                        <div class="content is-small is-pulled-left" ng-bind-html="post.content.html"></div>
                         <figure class="image is-4by9 is-pulled-right">
                             <img src="https://via.placeholder.com/640x480.png">
                         </figure>

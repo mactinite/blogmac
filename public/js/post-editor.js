@@ -31,7 +31,7 @@ markedApp.controller('markedController', ['$scope', '$http', function ($scope, $
 
     this.data = { title: markdown.title, content: markdown.inputText };
 
-    $scope.Submit = function () {
+    $scope.Submit = function (event) {
         var req = {
             method: 'POST',
             url: 'blog/new-post/submit-post',
@@ -40,12 +40,17 @@ markedApp.controller('markedController', ['$scope', '$http', function ($scope, $
             },
             data: { title: markdown.title, content: markdown.inputText }
         };
+        angular.element(event.target).addClass("is-loading");
         $http(req).then(function (res, status, headers, config) {
             if (res.data.error != null) {
-                $scope.message = res.data.error;
+                $scope.error = res.data.error;
+                angular.element(event.target).addClass("is-danger")
+                .removeClass('is-loading is-primary');
             }
             else {
                 $scope.message = "Successfully Posted!";
+                angular.element(event.target).addClass("is-success")
+                .removeClass('is-loading is-primary');
                 location.href = res.data.url;
             }
         });

@@ -8,7 +8,7 @@
                     <small>By <span ng-bind="blogPostData.author"></span> on {[{blogPostData.date | date}]}</span></small>
                 </h4>
                 <hr/>
-                <div class="content is-small" marked="blogPostData.content"></div>
+                <div class="content is-small" ng-bind-html="blogPostData.content.html"></div>
             </div>
         </div>
     </div>

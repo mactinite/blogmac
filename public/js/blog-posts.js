@@ -1,4 +1,4 @@
-var blogPosts = angular.module("blogPosts", ['hc.marked']);
+var blogPosts = angular.module("blogPosts", ['hc.marked','ngSanitize']);
 
 blogPosts.config(['markedProvider', function (markedProvider) {
     markedProvider.setOptions({

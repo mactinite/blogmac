@@ -1,7 +1,7 @@
 <section class="section" ng-app="markedApp" ng-controller="markedController as marked">
     <div class="container">
-        <div class="notification is-warning" ng-if="message">
-            <p ng-bind="message"></p>
+        <div class="notification is-danger" ng-if="error">
+            <p ng-bind="error"></p>
         </div>
         <h4 class="title is-4">{{page_title}}</h2>
         <h6 class="subtitle is-6">Create a blog post using markdown. Here's a <a target="_blank" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Cheatsheet</a>.</h3>
@@ -40,7 +40,7 @@
 
             <div class="level">
                 <div class="level-item has-text-centered">
-                    <a class="button is-primary" value="Save" ng-click="Submit()">Submit</a>
+                    <a class="button is-primary" value="Save" ng-click="Submit($event)">Submit</a>
                 </div>
             </div>
         </div>
