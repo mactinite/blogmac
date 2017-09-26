@@ -21,7 +21,7 @@ var validator = require('validator');
 
 global.appRoot = path.resolve(__dirname);
 
-mongoose.connect(config.url);
+mongoose.connect(process.env.DB_URL ||config.url);
 
 //data models
 require('./models/posts');
@@ -42,7 +42,7 @@ app.set('view engine', 'hbs');
 //required for passport
 app.use(cookieSession({
   name: 'session',
-  secret : config.cookieSecret,
+  secret : process.env.AUTH_SECRET || config.cookieSecret,
   maxAge: 24 * 60 * 60 * 1000
 }));
 app.use(passport.initialize());
