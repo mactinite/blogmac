@@ -13,7 +13,7 @@ admin.controller("profileController", ["$scope", "$http", function ($scope, $htt
 admin.controller("adminController", ["$scope", "$http", function ($scope, $http) {
     
     var hash = window.location.hash.slice(1);
-    $scope.currentView = hash != "" ? hash : "Users";
+    $scope.currentView = hash != "" ? hash : "Posts";
     
 
     $scope.getBlogData = function (pagenumber) {

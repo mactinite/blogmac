@@ -2,7 +2,8 @@
 
     <div class="container columns">
         <div class="column menu">
-            <p class="menu-label">Blog</p>
+            {{#if permissions.admin}}
+            <p class="menu-label">Administration</p>
             <ul class="menu-list">
                 <li>
                     <a href="" ng-class="{'is-active' : currentView=='Users'}" ng-click="setView('Users')">
@@ -12,6 +13,10 @@
                         Users 
                     </a>
                 </li>
+            </ul>
+            {{/if}}
+            <p class="menu-label">Blog</p>
+            <ul class="menu-list">
                 <li>
                     <a href="" ng-class="{'is-active' : currentView=='Posts'}" ng-click="setView('Posts')">
                         <span class="icon is-pulled-left right-m-20">

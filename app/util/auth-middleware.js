@@ -23,6 +23,8 @@ module.exports = {
                 UserRole.findById(user.role, (err, role) => {
                     permissions.forEach(function(permission) {
                         req.user.role_name = role._doc.name;
+                        req.user.permissions = role._doc.permissions;
+                        
                         if(!role._doc.permissions[permission])
                             res.redirect('/')
                     }, this);

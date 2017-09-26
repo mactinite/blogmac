@@ -6,11 +6,12 @@ var authMW = require(appRoot + '/util/auth-middleware.js');
 
 module.exports = function (passport,router) {
 
-    router.get('/admin', authMW.MatchPermissions(['admin']) ,function (req, res, next) {
+    router.get('/admin', authMW.MatchPermissions(['write']) ,function (req, res, next) {
         pageData = {
             template: "admin.hbs",
             title: app_name,
             sub_title: tag_line,
+            permissions : req.user.permissions,
             page_title:"Administration",
             postData: {}
         };
