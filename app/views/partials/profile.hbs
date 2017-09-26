@@ -2,6 +2,71 @@
     <div class="bottom-m-25">
         <h5 class="title is-5">Profile</h5>
         <hr/>
-       
+        <form id="update-pass">
+            <div class="field">
+                <h6 class="title is-6" >Update Password</h6>
+                <p class="control has-icons-left">
+                    <input class="input" id="password" type="password" placeholder="Current Password">
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" id="new-password" type="password" placeholder="New Password">
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field is-grouped is-grouped-centered">
+                <p class="control">
+                    <a class="button is-primary">
+                    Submit
+                    </a>
+                </p>
+            </div>
+        </form>
+        <h6 class="title is-6" >User Settings</h6>
+        <div class="field has-addons">
+            <div class="control is-expanded">
+                <input class="input" type="text" ng-model='firstName' reset-state="user_name_update" placeholder="First Name" id="first-name"></input>
+            </div>
+            <div class="control is-expanded">
+                <input class="input" type="text" ng-model='lastName' reset-state="user_name_update" placeholder="Last Name" id="tag-line"></input>
+            </div>
+            <div class="control">
+                <button class="button is-info" id="user_name_update" ng-click="setBlogName();">Update</button>
+            </div>
+        </div>
+        <div class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <div class="file has-name">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="resume">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fa fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Choose a file…
+                                </span>
+                            </span>
+                            <span class="file-name">
+                                user-image.jpg
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="level-item">
+                <figure class="image is-128x128">
+                    <img src="http://bulma.io/images/placeholders/128x128.png">
+                </figure>
+            </div>
+        </div>
     </div>
+</div>
 </div>
