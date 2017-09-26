@@ -16,7 +16,15 @@ var session = require('express-session');
 var cookieSession = require('cookie-session');
 
 var hbsHelpers = require("./util/handlebars-helpers.js"); // Custom Handlebars Helpers
-var config = require('./config/config.js');
+
+try {
+  var config = require('./config/config.js');
+  // do stuff
+} catch (ex) {
+
+}
+
+
 var validator = require('validator');
 
 global.appRoot = path.resolve(__dirname);
