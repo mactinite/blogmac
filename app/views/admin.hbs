@@ -13,6 +13,14 @@
                         Users 
                     </a>
                 </li>
+                <li>
+                    <a href="" ng-class="{'is-active' : currentView=='Config'}" ng-click="setView('Config')">
+                        <span class="icon is-pulled-left right-m-20">
+                            <i class="fa fa-cog"></i>
+                        </span>                        
+                        Config 
+                    </a>
+                </li>
             </ul>
             {{/if}}
             <p class="menu-label">Blog</p>
@@ -37,14 +45,6 @@
             <p class="menu-label">Settings</p>
             <ul class="menu-list">
                 <li>
-                    <a href="" ng-class="{'is-active' : currentView=='Config'}" ng-click="setView('Config')">
-                        <span class="icon is-pulled-left right-m-20">
-                            <i class="fa fa-cog"></i>
-                        </span>                        
-                        Config 
-                    </a>
-                </li>
-                <li>
                     <a href="" ng-class="{'is-active' : currentView=='Profile'}" ng-click="setView('Profile')">
                         <span class="icon is-pulled-left right-m-20">
                             <i class="fa fa-user"></i>
@@ -55,7 +55,11 @@
             </ul>
         </div>
         <div class="column box is-three-quarters">
-            {{> users}} {{> posts}} {{> pages}} {{> config}} {{> profile}}
+            {{#if permissions.admin}}{{> users}}{{/if}}
+            {{> posts}} 
+            {{> pages}} 
+            {{#if permissions.admin}}{{> config}}{{/if}}
+            {{> profile}}
         </div>
     </div>
 </div>
