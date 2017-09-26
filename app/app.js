@@ -19,9 +19,9 @@ var hbsHelpers = require("./util/handlebars-helpers.js"); // Custom Handlebars H
 
 try {
   var config = require('./config/config.js');
-  // do stuff
 } catch (ex) {
-
+  console.log("No config file present");
+  console.log(ex);
 }
 
 
