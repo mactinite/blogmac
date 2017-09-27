@@ -21,6 +21,7 @@ try {
   var config = require('./config/config.js');
 } catch (ex) {
   console.log("No config file present");
+  config = {};
   config.url = process.env.DB_URL;
   config.cookieSecret = process.env.AUTH_SECRET;
   console.log(ex);
