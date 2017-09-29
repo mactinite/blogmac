@@ -16,7 +16,7 @@ Features
     - [x] Managing user roles
     - [ ] Manage users
     - [ ] Sending Registration invites
-    - [ ] Manage Blog Posts
+    - [x] Manage Blog Posts
     - [ ] Manage Custom Pages (DEPENDENCY: Custom Pages)
     - [ ] Statistics Dashboard
 - [X] Configuration interface (Changing global site values, changing site behavior)
