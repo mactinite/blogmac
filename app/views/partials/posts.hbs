@@ -16,8 +16,8 @@
                         </p>
                         <p class="control">
                             <button class="button">
-                    Search
-                    </button>
+                                Search
+                            </button>
                         </p>
                     </div>
                 </div>
@@ -38,6 +38,7 @@
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
+                        <a ng-href="/blog/post/{[{post.page_slug}]}">
                         <h3 class="title is-3" ng-bind="post.title"></h3>
                         </a>
 
@@ -45,7 +46,7 @@
                     <div class="level-item">
                         <div>
                             <p class="is-size-7"> Written by {[{post.author}]} on {[{post.date | date}]}</p>
-                            <p class="is-size-7"> Last Edited on {[{post.lastEdited | date}]} by Editor</p>
+                            <p class="is-size-7" ng-if="post.editedBy"> Last Edited on {[{post.lastEdited | date}]} by {[{post.editedBy}]}</p>
                         </div>
                     </div>
                 </div>

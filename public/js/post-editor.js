@@ -56,4 +56,47 @@ markedApp.controller('markedController', ['$scope', '$http', function ($scope, $
         });
     };
 
+    $scope.getBlogPostData = function(pageSlug){
+        var req = {
+            method: 'GET',
+            url: '/blog/blog-post?page_slug=' + pageSlug
+        };
+        $http(req).then(function(res,status,headers,config){
+            if(res.data.error != null){
+                $scope.error = res.data.error;
+            }
+            else{
+                $scope.blogPostData = res.data;
+                markdown.inputText = res.data.content.markdown;
+                markdown.title = res.data.title;
+            }
+            
+        });
+    };
+
+    $scope.Update = function (event) {
+        var req = {
+            method: 'POST',
+            url: './update',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: { title: markdown.title, content: markdown.inputText }
+        };
+        angular.element(event.target).addClass("is-loading");
+        $http(req).then(function (res, status, headers, config) {
+            if (res.data.error != null) {
+                $scope.error = res.data.error;
+                angular.element(event.target).addClass("is-danger")
+                .removeClass('is-loading is-primary');
+            }
+            else {
+                $scope.message = "Successfully Posted!";
+                angular.element(event.target).addClass("is-success")
+                .removeClass('is-loading is-primary');
+                location.href = "./";
+            }
+        });
+    };
+
 }]);

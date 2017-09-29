@@ -34,6 +34,7 @@ var BlogPost = new Schema({
     },
     date: Date,
     lastEdited: Date,
+    editedBy : String,
     content: {
         markdown: String,
         html: String,
@@ -101,8 +102,37 @@ BlogPost.statics.createBlogPost = function (title, author, md) {
     });
 };
 
-BlogPost.statics.updateBlogPost = function (page_slug, title, editor, markdown) {
-    //TODO
+BlogPost.statics.updateBlogPost = function (old_page_slug ,page_slug, title, editor, markdown, canEdit) {
+    return new Promise((resolve, reject) => {
+        var query = {page_slug : old_page_slug};
+        this.findOne(query, (err, post)=> {
+
+            if(err){
+                reject({"error" : "Could not find post."});
+            }
+            else if(editor != post._doc.author || !canEdit){
+                reject({"error" : "You don't have permission to edit this post."})
+            }
+            else{
+
+                // update the post
+                post.page_slug = page_slug;
+                post.title = title;
+                post.editedBy = editor;
+                post.lastEdited = new Date();
+                post.content.markdown = markdown;
+                post.content.html = marked(markdown);
+                post.save((err, updatedPost) => {
+                    if(err){
+                        reject({"error" : "Post not valid, please try again."});
+                    }
+                    else{
+                        resolve({"status" : "success"});
+                    }
+                });
+            }
+        });
+    });
 };
 
 BlogPost.statics.deleteBlogPost = function (page_slug, user, user_role) {
@@ -136,7 +166,17 @@ BlogPost.statics.deleteBlogPost = function (page_slug, user, user_role) {
     });
 };
 
-
+BlogPost.statics.getPostAuthor = function(page_slug){
+    return new Promise((resolve, reject) => {
+        this.findOne({'page_slug': page_slug }).lean().populate("blogpost")
+        .exec((err, post) => {
+            if(err){
+                reject({error : "Could not find post"});
+            }
+            resolve(post.author);
+        });
+    });
+};
 
 var blogPost = mongoose.model('BlogPost', BlogPost);
 

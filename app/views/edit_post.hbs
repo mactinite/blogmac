@@ -1,0 +1,65 @@
+<section class="section" ng-app="markedApp" ng-controller="markedController as marked" ng-init="getBlogPostData('{{slug}}')">
+    <div class="container">
+        <div class="notification is-danger" ng-show="error">
+            <p ng-bind="error"></p>
+        </div>
+        <h4 class="title is-4">{{page_title}}</h2>
+                <div class="tabs is-toggle is-centered is-small">
+                    <ul>
+                        <li ng-class="{'is-active' : !marked.showPreview}" ng-click="marked.showPreview = false">
+                            <a>
+                    <span class="icon is-small"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span>Edit</span>
+                    </a>
+                        </li>
+                        <li ng-class="{'is-active' : marked.showPreview}" ng-click="marked.showPreview = true">
+                            <a>
+                    <span class="icon is-small"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                    <span>Preview</span>
+                    </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="container bottom-m-10">
+                    <section ng-hide="marked.showPreview" class="post-content bottom-m-10">
+                        <div class="field">
+                            <label class="label" for="title">Post title: </label>
+                            <input class="input" type="text" ng-model="marked.title" id="title" />
+                        </div>
+                        <p>by <strong ng-bind="blogPostData.author"></strong></p>
+                        <textarea class="textarea" id="md-editor" rows="10" ng-model="marked.inputText"></textarea>
+
+                    </section>
+
+                    <div class="" ng-show="marked.showPreview">
+                        <hr/>
+                        <div class="content is-small" id="compiled-markdown" ng-bind-html="marked.outputText"></div>
+                    </div>
+                    <!-- Will implement later
+                    <h5 class="title is-5">Options</h5>
+                    <label class="label" for="title">Page slug: </label>
+                    <div class="field has-addons">   
+                        <p class="control">
+                            <a class="button is-static">
+                                /blog/post/
+                            </a>
+                        </p>
+                        <p class="control is-expanded">
+                            <input class="input" ng-model="blogData.page_slug">
+                        </p>
+                    </div>
+                    -->
+
+                    <div class="level">
+                        <div class="level-item has-text-centered">
+                            <a class="button is-primary" value="Save" ng-click="Update($event)">Save</a>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </div>
+
+
+    <script type="text/javascript" src="/js/post-editor.js">
+
+    </script>

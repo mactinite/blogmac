@@ -62,4 +62,16 @@ module.exports = function (passport,router) {
         });
     });
 
+    router.post('/blog/post/:page_slug/update',authMW.MatchPermissions(['write']), function (req, res, next) {
+        BlogPost.updateBlogPost(req.params.page_slug, req.params.page_slug, req.body.title, req.user._doc.username, req.body.content, req.user.permissions.edit).then((response) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify(response));
+        }).catch((e) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(e);
+        });
+    });
+
+    
+
 };
