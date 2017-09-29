@@ -28,17 +28,19 @@ module.exports = function (passport,router) {
             if(req.user.username !== author || !req.user.permissions.admin){
                 res.redirect("/blog/post/"+req.params.page_slug);
             }
+
+            pageData = {
+                template: "edit_post.hbs",
+                title: app_name,
+                sub_title: tag_line,
+                slug: req.params.page_slug,
+                user: req.user,
+                isAuthenticated: req.isAuthenticated(),
+            };
+            res.render(pageData.template, pageData);
         });
 
-        pageData = {
-            template: "edit_post.hbs",
-            title: app_name,
-            sub_title: tag_line,
-            slug: req.params.page_slug,
-            user: req.user,
-            isAuthenticated: req.isAuthenticated(),
-        };
-        res.render(pageData.template, pageData);
+
     });
 
     /* GET home page. */
