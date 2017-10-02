@@ -39,12 +39,12 @@ module.exports = function (passport,router) {
     router.post("/blog/new-post/submit-post", authMW.MatchPermissions(['write']), function (req, res) {
         var content,user,title;
         content = req.body.content;
-        user = req.user.username;
+        user = req.user._doc;
         title = req.body.title;
-        BlogPost.createBlogPost(title, user, content).then(function(result){
+        BlogPost.createBlogPost(title, req.user._doc, content).then(function(result){
             if(result){
                 res.setHeader('Content-Type', 'application/json');
-                res.send({ doRedirect: true, url: "../blog-post/" + result.page_slug });
+                res.send({ doRedirect: true, url: "../blog/post/" + result.page_slug });
             }
         }).catch(e => {
             res.setHeader('Content-Type', 'application/json');
@@ -53,7 +53,7 @@ module.exports = function (passport,router) {
     });
 
     router.delete('/blog/blog-post/:page_slug/delete',authMW.MatchPermissions(['write']), function (req, res, next) {
-        BlogPost.deleteBlogPost(req.params.page_slug, req.user.username, req.user.role_name).then((pageData) => {
+        BlogPost.deleteBlogPost(req.params.page_slug, req.user._doc, req.user.role_name).then((pageData) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(pageData));
         }).catch((e) => {
@@ -63,7 +63,7 @@ module.exports = function (passport,router) {
     });
 
     router.post('/blog/post/:page_slug/update',authMW.MatchPermissions(['write']), function (req, res, next) {
-        BlogPost.updateBlogPost(req.params.page_slug, req.params.page_slug, req.body.title, req.user._doc.username, req.body.content, req.user.permissions.edit).then((response) => {
+        BlogPost.updateBlogPost(req.params.page_slug, req.params.page_slug, req.body.title, req.user._doc, req.body.content, req.user.permissions.edit).then((response) => {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(response));
         }).catch((e) => {

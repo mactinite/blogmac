@@ -18,12 +18,17 @@ var User = new Schema({
     hash: String,
     salt: String,
     signed_up: Date,
-    role : String
+    role : String,
+    avatar : String
 });
 
 User.methods.setPassword = function(password){
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+};
+
+User.methods.setAvatar = function(image_id){
+    this.avatar = image_id;
 };
 
 User.methods.validPassword = function(password) {

@@ -36,5 +36,25 @@ module.exports = {
                 res.redirect('/');
             }
         }
-    }
+    },
+    MatchOwner: function () {
+        return function (req, res, next) {
+            // if user is authenticated in the session, carry on
+            if (req.isAuthenticated()) {
+                if(req.params.username === req.user._doc.username){
+                    req.isOwner = true;
+                    next();
+                }
+                else{
+                    req.isOwner = false;
+                }
+            }
+            else {// if they aren't redirect them to the home page
+                req.isOwner = false;
+                next();
+            }
+        }
+    },
+
+
 }

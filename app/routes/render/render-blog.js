@@ -25,7 +25,7 @@ module.exports = function (passport,router) {
     router.get('/blog/post/:page_slug/edit', authMW.MatchPermissions(['write']), function (req, res, next) {       
         
         BlogPost.getPostAuthor(req.params.page_slug).then((author) => {
-            if(req.user.username !== author || !req.user.permissions.admin){
+            if(req.user._doc.email !== author.email || !req.user.permissions.admin){
                 res.redirect("/blog/post/"+req.params.page_slug);
             }
 

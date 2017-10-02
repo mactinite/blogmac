@@ -9,7 +9,7 @@
                                 <a ng-href="/blog/post/{[{post.page_slug}]}" ng-bind="post.title"></a>
                             </h5>
                             <h6 class="subtitle is-6">
-                                <p><small>By <span ng-bind="post.author"></span> on {[{post.date | date}]}</span></small></p>
+                                <p><small>By <span ng-bind="post.author.username"></span> on {[{post.date | date}]}</span></small></p>
                             </h6>
                             <div class="content is-small article-small" ng-bind-html="post.content.html"></div>
                         </div>
@@ -23,13 +23,13 @@
                     </div>
                 </article>
 
-                <article ng-if="$first && !$last" class="hero is-small is-bold">
+                <article ng-if="$first" class="hero is-small is-bold">
                     <div class="hero-body">
                         <h2 class="title is-2">
                             <a ng-href="/blog/post/{[{post.page_slug}]}" ng-bind="post.title"></a>
                         </h2>
                         <h6 class="subtitle is-6">
-                            <p><small>By <span ng-bind="post.author"></span> on {[{post.date | date}]}</span></small></p>
+                            <p><small>By <span ng-bind="post.author.username"></span> on {[{post.date | date}]}</span></small></p>
                         </h6>
                         <div class="content is-normal is-pulled-left" ng-bind-html="post.content.html"></div>
                     </div>

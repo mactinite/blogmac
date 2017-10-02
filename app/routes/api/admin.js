@@ -14,4 +14,5 @@ module.exports = function (passport, router) {
     router.get("/admin/users/:email", authMW.MatchPermissions(['admin']), UsersController.GetByEmail);
     require("./admin/user-roles")(passport, router);
     require("./admin/site-config")(passport, router);
+    require("./admin/profile-config")(passport, router);
 };

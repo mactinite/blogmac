@@ -45,8 +45,8 @@
                     </div>
                     <div class="level-item">
                         <div>
-                            <p class="is-size-7"> Written by {[{post.author}]} on {[{post.date | date}]}</p>
-                            <p class="is-size-7" ng-if="post.editedBy"> Last Edited on {[{post.lastEdited | date}]} by {[{post.editedBy}]}</p>
+                            <p class="is-size-7"> Written by {[{post.author.username}]} on {[{post.date | date}]}</p>
+                            <p class="is-size-7" ng-if="post.editedBy"> Last Edited on {[{post.lastEdited | date}]} by {[{post.editedBy.username}]}</p>
                         </div>
                     </div>
                 </div>

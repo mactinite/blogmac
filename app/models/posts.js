@@ -25,8 +25,8 @@ var BlogPost = new Schema({
         unique: true
     },
     author: {
-        type: String,
-        required: true
+        username : String,
+        email : String
     },
     title: {
         type: String,
@@ -34,7 +34,10 @@ var BlogPost = new Schema({
     },
     date: Date,
     lastEdited: Date,
-    editedBy : String,
+    editedBy : {
+        username : String,
+        email : String
+    },
     content: {
         markdown: String,
         html: String,
@@ -60,6 +63,7 @@ BlogPost.statics.getBlogPost = function(slug){
         });
     });
 };
+
 BlogPost.statics.getBlogPosts = function(pageNumber){
     return new Promise(function (resolve, reject) {
         blogPost.paginate({}, { page: pageNumber, leanWithId: true, lean: true, limit: 4, sort: { date: -1 } }).then(result => {
@@ -81,7 +85,7 @@ BlogPost.statics.createBlogPost = function (title, author, md) {
         var post = new this();
         var slug = slugify(title);
         post.page_slug = slug;
-        post.author = author;
+        post.author = {username: author.username, email : author.email};
         post.title = title;
         post.date = new Date();
         post.lastEdited = post.date;
@@ -110,7 +114,7 @@ BlogPost.statics.updateBlogPost = function (old_page_slug ,page_slug, title, edi
             if(err){
                 reject({"error" : "Could not find post."});
             }
-            else if(editor != post._doc.author || !canEdit){
+            else if(editor.email != post._doc.author.email || !canEdit){
                 reject({"error" : "You don't have permission to edit this post."})
             }
             else{
@@ -118,7 +122,7 @@ BlogPost.statics.updateBlogPost = function (old_page_slug ,page_slug, title, edi
                 // update the post
                 post.page_slug = page_slug;
                 post.title = title;
-                post.editedBy = editor;
+                post.editedBy = {username: editor.username, email : editor.email};;
                 post.lastEdited = new Date();
                 post.content.markdown = markdown;
                 post.content.html = marked(markdown);
@@ -137,7 +141,7 @@ BlogPost.statics.updateBlogPost = function (old_page_slug ,page_slug, title, edi
 
 BlogPost.statics.deleteBlogPost = function (page_slug, user, user_role) {
     return new Promise((resolve, reject) => {
-        var author = "";
+        var author = {};
         this.findOne({'page_slug': page_slug }).lean().populate("blogpost")
         .exec((err, post) => {
             if(!err && post !=null){
@@ -147,7 +151,7 @@ BlogPost.statics.deleteBlogPost = function (page_slug, user, user_role) {
                 reject({"error" : "Could not find post to delete."});
             }
 
-            if(user === author || user_role.toLowerCase() === "administrator"){
+            if(user.email === author.email || user_role.toLowerCase() === "administrator"){
                 //DELETE POST
                 this.remove({'page_slug' : page_slug}, function(err){
                     if(!err){
